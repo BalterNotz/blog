@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Tosainu Lab</title>
+    <link href="https://blog.myon.info/feed.xml" rel="self" />
+    <link href="https://blog.myon.info" />
+    <id>https://blog.myon.info/feed.xml</id>
+    <author>
+        <name>Tosainu</name>
+        <email>tosainu.maple@gmail.com</email>
+    </author>
+    <updated>2018-08-16T06:14:00Z</updated>
+    <entry>
+    <title>route なしの Rules で Hakyll のビルドを高速化する</title>
+    <link href="https://blog.myon.info/entry/2018/08/16/non-route-rules/index.html" />
+    <id>https://blog.myon.info/entry/2018/08/16/non-route-rules/index.html</id>
+    <published>2018-08-16T06:14:00Z</published>
+    <updated>2018-08-16T06:14:00Z</updated>
+    <summary type="html"><![CDATA[TL;DRHakyll の Rules で route は省略できる省略すると compile されるが出力されないこの挙動は何度も呼ばれる処理のプリコンパイルに応用できそうblog.myon.info のフッタ生成処理にこれを採用してビルドを高速化できた全ページのフッタに最新の記]]></summary>
+</entry>
+<entry>
+    <title>ブログを Hakyll に移行した</title>
+    <link href="https://blog.myon.info/entry/2018/03/21/hakyll/index.html" />
+    <id>https://blog.myon.info/entry/2018/03/21/hakyll/index.html</id>
+    <published>2018-03-21T13:44:00Z</published>
+    <updated>2018-03-21T13:44:00Z</updated>
+    <summary type="html"><![CDATA[Middleman で構築していたこのブログを、Haskell 製の静的サイトジェネレータである Hakyll に移行しました。移行した理由主な理由は次の通りMiddleman 4.x になってからの不安定さに耐えられなくなった以前から Hakyll 興味があった普段書かない言語で設定]]></summary>
+</entry>
+<entry>
+    <title>簡単な2クラスの線形分類器を実装してみる</title>
+    <link href="https://blog.myon.info/entry/2018/01/05/haskell-linear-classifier/index.html" />
+    <id>https://blog.myon.info/entry/2018/01/05/haskell-linear-classifier/index.html</id>
+    <published>2018-01-05T14:51:00Z</published>
+    <updated>2018-01-05T14:51:00Z</updated>
+    <summary type="html"><![CDATA[あけましたおめでとうございます (✿╹◡╹)ﾉ2017年は、今まで通っていた echo 6auY5bCCCg== | base64 -d を卒業し、情報の大学に編入しました。編入1年目ということでなかなか他のことに手を出せないくらい忙しかったのは辛かったけれど、念願の CS 講義を受けられるように]]></summary>
+</entry>
+<entry>
+    <title>Tokyo Westerns CTF 3rd 2017: simple note</title>
+    <link href="https://blog.myon.info/entry/2017/09/04/twctf-2017-writeups/index.html" />
+    <id>https://blog.myon.info/entry/2017/09/04/twctf-2017-writeups/index.html</id>
+    <published>2017-09-04T14:51:00Z</published>
+    <updated>2017-09-04T14:51:00Z</updated>
+    <summary type="html"><![CDATA[Tokyo Westerns CTF 3rd 2017 に1人チーム poepoe で参加してました。Welcome!! (Misc 11)Just do it! (Pwn 23)Palindromes Pairs - Coding Phase - (PPC 24)Rev Rev Rev ]]></summary>
+</entry>
+<entry>
+    <title>DEF CON CTF 2017 Qualifier writeup</title>
+    <link href="https://blog.myon.info/entry/2017/05/02/def-con-ctf-2017-qualifier-writeups/index.html" />
+    <id>https://blog.myon.info/entry/2017/05/02/def-con-ctf-2017-qualifier-writeups/index.html</id>
+    <published>2017-05-01T16:32:00Z</published>
+    <updated>2017-05-01T16:32:00Z</updated>
+    <summary type="html"><![CDATA[DEF CON CTF 2017 Qualifier に一人チーム poepoe で参加. 144 points で 117 位.Baby’s First の問題しか解けなかったけど, pwn するの久しぶりだったので楽しかった.それ以外の問題も点を入れていけるようにしていくぞ💪.smash]]></summary>
+</entry>
+<entry>
+    <title>Codegate 2017 CTF prequals writeup</title>
+    <link href="https://blog.myon.info/entry/2017/02/11/codegate-2017-prequals-writeup/index.html" />
+    <id>https://blog.myon.info/entry/2017/02/11/codegate-2017-prequals-writeup/index.html</id>
+    <published>2017-02-11T12:20:00Z</published>
+    <updated>2017-02-11T12:20:00Z</updated>
+    <summary type="html"><![CDATA[Codegate 2017 CTF の Prequalification Round に一人チーム poepoe で参加. 305 points で 78 位(General)でした.pwn 過去問でもよく見かける Codegate 関連の CTF というだけあって, 実行ファイル解析系の問題が多]]></summary>
+</entry>
+<entry>
+    <title>AlexCTF writeup</title>
+    <link href="https://blog.myon.info/entry/2017/02/06/alexctf-writeup/index.html" />
+    <id>https://blog.myon.info/entry/2017/02/06/alexctf-writeup/index.html</id>
+    <published>2017-02-06T11:16:00Z</published>
+    <updated>2017-02-06T11:16:00Z</updated>
+    <summary type="html"><![CDATA[AlexCTF にも一人チーム poepoe でこっそり参加. 590 points で 385 位でした.CryptographyCR1: Ultracoded (50pt)こんな感じのテキストファイルが与えられる.$ cat zero_oneZERO ONE ZERO ZERO ON]]></summary>
+</entry>
+<entry>
+    <title>BITSCTF writeup</title>
+    <link href="https://blog.myon.info/entry/2017/02/05/bitsctf-writeup/index.html" />
+    <id>https://blog.myon.info/entry/2017/02/05/bitsctf-writeup/index.html</id>
+    <published>2017-02-05T12:15:00Z</published>
+    <updated>2017-02-05T12:15:00Z</updated>
+    <summary type="html"><![CDATA[BITSCTF 2017 に一人チーム poepoe でこっそり参加. 50 points で 166 位でした.キャンプ以来少しずつ勉強してきた pwn の力試しにと登録したのだけど, 開始直後は経験のないジャンルしかなくてすぐ諦めてしまっていた.けれどもたまたま今日の夕方見たら2つ追加されて]]></summary>
+</entry>
+<entry>
+    <title>Arch LinuxでL2TP/IPsec</title>
+    <link href="https://blog.myon.info/entry/2016/08/21/arch-linux-l2tp-ipsec/index.html" />
+    <id>https://blog.myon.info/entry/2016/08/21/arch-linux-l2tp-ipsec/index.html</id>
+    <published>2016-08-20T16:10:00Z</published>
+    <updated>2016-08-20T16:10:00Z</updated>
+    <summary type="html"><![CDATA[いろいろあってVPNを張りたくなったので, Arch LinuxでL2TP/IPsecなVPNサーバを構築したときのメモです.環境図にするとこんな感じ.記事中では, この図のIPアドレス及びネットワークインターフェース名を使っていきます.ちなみに, サーバにはクーポンが残っていたCono]]></summary>
+</entry>
+<entry>
+    <title>セキュリティ・キャンプ全国大会2016に参加してきました</title>
+    <link href="https://blog.myon.info/entry/2016/08/18/seccamp2016-report/index.html" />
+    <id>https://blog.myon.info/entry/2016/08/18/seccamp2016-report/index.html</id>
+    <published>2016-08-17T17:55:00Z</published>
+    <updated>2016-08-17T17:55:00Z</updated>
+    <summary type="html"><![CDATA[certificate8/9~13の5日間, クロスウェーブ幕張で行われたセキュリティ・キャンプ全国大会2016に参加してきました.講師, チューターの皆さん, 4班 “このキャンプには問題がある!” をはじめとする50名の参加者の皆さん, そして事務局や協賛企業, クロスウェーブ幕張の方な]]></summary>
+</entry>
+<entry>
+    <title>とさいぬの隠し部屋はTosainu Labになりました</title>
+    <link href="https://blog.myon.info/entry/2016/07/03/new-design/index.html" />
+    <id>https://blog.myon.info/entry/2016/07/03/new-design/index.html</id>
+    <published>2016-07-03T14:59:00Z</published>
+    <updated>2016-07-03T14:59:00Z</updated>
+    <summary type="html"><![CDATA[タイトルの通りです.“とさいぬの隠し部屋” は “Tosainu Lab” になりました.理由としては, 最近ブログタイトル, 〇〇の部屋ってあたりが数世代前のｲﾝﾀｰﾈｯﾂ感出してるのでそろそろ変えたい— とさいぬ (@myon___) June 28, 2016という思いが強]]></summary>
+</entry>
+<entry>
+    <title>セキュリティ・キャンプ全国大会2016 に参加します</title>
+    <link href="https://blog.myon.info/entry/2016/06/26/seccamp2016/index.html" />
+    <id>https://blog.myon.info/entry/2016/06/26/seccamp2016/index.html</id>
+    <published>2016-06-25T16:34:00Z</published>
+    <updated>2016-06-25T16:34:00Z</updated>
+    <summary type="html"><![CDATA[ちゃんとした報告が遅れましたが, 今年のセキュリティキャンプに受講生として参加することになりました.3年前, Twitterを始めてすぐに知ったセキュキャン. 翌年応募をしようとするも, 課題を全く埋めることができなかったときの悔しさは今も忘れません. 他にも要因はありましたが, こうして痛感した]]></summary>
+</entry>
+<entry>
+    <title>Rabbit House Tea Party 2016 参加レポート</title>
+    <link href="https://blog.myon.info/entry/2016/05/07/rabbit-house-tea-party-2016/index.html" />
+    <id>https://blog.myon.info/entry/2016/05/07/rabbit-house-tea-party-2016/index.html</id>
+    <published>2016-05-07T14:11:00Z</published>
+    <updated>2016-05-07T14:11:00Z</updated>
+    <summary type="html"><![CDATA[Rabbit House Tea Party 2016 お疲れ様でした!!!こういったアニメのイベントに参加するのは初めてなのですが, 本当に最高な1日でした!!!前日夜当初の予定では電車で 11:00 過ぎくらいに行こうかと思っていたけれども, 当日の物販の待機列形成が 6:00 らしい]]></summary>
+</entry>
+<entry>
+    <title>進級してました</title>
+    <link href="https://blog.myon.info/entry/2016/03/31/promotion/index.html" />
+    <id>https://blog.myon.info/entry/2016/03/31/promotion/index.html</id>
+    <published>2016-03-31T13:16:00Z</published>
+    <updated>2016-03-31T13:16:00Z</updated>
+    <summary type="html"><![CDATA[このまま早く卒業したい…2015の振り返り記事, 本当は12月中に書きたかったのですが, 本当に忙しくて…一段落ついたころ(年度末くらい?)に改めて記事にしたいと思います.2016めんどくさいのでやめました()]]></summary>
+</entry>
+<entry>
+    <title>SlackのBotを書いてみた</title>
+    <link href="https://blog.myon.info/entry/2016/01/24/slack-bot/index.html" />
+    <id>https://blog.myon.info/entry/2016/01/24/slack-bot/index.html</id>
+    <published>2016-01-24T05:44:00Z</published>
+    <updated>2016-01-24T05:44:00Z</updated>
+    <summary type="html"><![CDATA[今までメッセージのやり取りをL○NEで行っていた某所が, ついにSlackに移行しました. 非常にめでたい.んで, 個人的に SlackといったらBot みたいなのがあるので, とりあえずサクッとBot書いてみた時のメモです.ぶっちゃけ, この手の記事は全世界各言語でいくつもあると思いますが.]]></summary>
+</entry>
+<entry>
+    <title>2016</title>
+    <link href="https://blog.myon.info/entry/2016/01/01/2016-new-year-resolution/index.html" />
+    <id>https://blog.myon.info/entry/2016/01/01/2016-new-year-resolution/index.html</id>
+    <published>2016-01-01T13:58:00Z</published>
+    <updated>2016-01-01T13:58:00Z</updated>
+    <summary type="html"><![CDATA[あけましたおめでとうございますー. 今年もよろしくお願いします.2015の振り返り記事, 本当は12月中に書きたかったのですが, 本当に忙しくて…一段落ついたころ(年度末くらい?)に改めて記事にしたいと思います.目標っぽいもの去年 -&gt; 2015 | とさいぬの隠し部屋プログラミング等]]></summary>
+</entry>
+<entry>
+    <title>それC++なら#defineじゃなくてもできるよ</title>
+    <link href="https://blog.myon.info/entry/2015/12/18/avoid-defining-macros/index.html" />
+    <id>https://blog.myon.info/entry/2015/12/18/avoid-defining-macros/index.html</id>
+    <published>2015-12-18T14:55:00Z</published>
+    <updated>2015-12-18T14:55:00Z</updated>
+    <summary type="html"><![CDATA[この記事は 初心者 C++er Advent Calendar 2015 18日目の記事です.17日目の記事は@yumetodoさんで C99からC++14を駆け抜けるC++講座でした.はじめましての人ははじめまして, とさいぬです.自称情報系の電気科学生をやっています.C++歴は2年くらい]]></summary>
+</entry>
+<entry>
+    <title>クラスメンバへのポインタ</title>
+    <link href="https://blog.myon.info/entry/2015/08/01/class-memberfunc-ptr/index.html" />
+    <id>https://blog.myon.info/entry/2015/08/01/class-memberfunc-ptr/index.html</id>
+    <published>2015-08-01T12:04:00Z</published>
+    <updated>2015-08-01T12:04:00Z</updated>
+    <summary type="html"><![CDATA[某所で書いているプログラムで, std::thread() にクラスのメンバ関数を渡したいなーってことがあった.std::thread::thread - cppreference.comにもそれっぽい記述がないのでググっていると, どうやらこんな感じにするらしい.c++ - Start thr]]></summary>
+</entry>
+<entry>
+    <title>Gnuplotおぼえがき</title>
+    <link href="https://blog.myon.info/entry/2015/06/21/gnuplot-memo/index.html" />
+    <id>https://blog.myon.info/entry/2015/06/21/gnuplot-memo/index.html</id>
+    <published>2015-06-20T23:55:00Z</published>
+    <updated>2015-06-20T23:55:00Z</updated>
+    <summary type="html"><![CDATA[僕はそういう学校に通っていることもあって, 毎週指導書に従った実験を行ってはレポートに追われるという日々を過ごしています.そのレポートには結果をグラフにせよという場合があるわけですが, 今年の実験は測定値の増加や複雑な指示があるなどの理由から, 今までのように手書きでグラフを描くのが流石に辛くなっ]]></summary>
+</entry>
+<entry>
+    <title>関数の戻り値が最も小さくなる配列の要素は何番目か</title>
+    <link href="https://blog.myon.info/entry/2015/06/13/std-min-element/index.html" />
+    <id>https://blog.myon.info/entry/2015/06/13/std-min-element/index.html</id>
+    <published>2015-06-12T17:26:00Z</published>
+    <updated>2015-06-12T17:26:00Z</updated>
+    <summary type="html"><![CDATA[関数foo()と何らかの値の入った配列nyanがあって,double foo(double arg) {  return std::acos(arg);}double nyan[] = {.0, -.1, .3, -.5, .7};foo(nyan[n])が最小になるn取得するって感じの]]></summary>
+</entry>
+
+</feed>

@@ -1,0 +1,367 @@
+<!DOCTYPE HTML><html lang="ja"><head><meta charset="utf-8"><meta content="Tosainu" name="author"><meta content="Arch LinuxでL2TP/IPsec2016/08/21 01:10Arch LinuxLinuxNetworkいろいろあってVPNを張りたくなったので, Arch LinuxでL2TP/IPsecなVPNサーバを構築したときのメモです.環境図にするとこんな感じ.記事中では, この図のI" name="description"><meta content="Hakyll" name="generator"><meta content="width=device-width, initial-scale=1" name="viewport"><meta property="twitter:card" content="summary"><meta property="twitter:site" content="myon___"><meta property="twitter:creator" content="myon___"><meta property="og:type" content="article"><meta property="og:url" content="https://blog.myon.info/entry/2016/08/21/arch-linux-l2tp-ipsec/index.html"><meta property="og:title" content="Arch LinuxでL2TP/IPsec | Tosainu Lab"><meta property="og:description" content="Arch LinuxでL2TP/IPsec2016/08/21 01:10Arch LinuxLinuxNetworkいろいろあってVPNを張りたくなったので, Arch LinuxでL2TP/IPsecなVPNサーバを構築したときのメモです.環境図にするとこんな感じ.記事中では, この図のI"><meta property="og:site_name" content="Tosainu Lab"><meta property="og:image" content="https://c6.staticflickr.com/9/8430/29103640045_c31110bdb5_z.jpg"><title>Arch LinuxでL2TP/IPsec | Tosainu Lab</title><link href="/vendor/normalize.css/normalize.css" rel="stylesheet"><link href="/stylesheets/style.css" rel="stylesheet"><link href="/stylesheets/highlight.css" rel="stylesheet"><link href="/vendor/fontawesome/style.css" rel="stylesheet"><link href="/vendor/katex/katex.min.css" rel="stylesheet"><link href="/feed.xml" title="Atom Feed" type="application/atom+xml" rel="alternate"><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-57978655-1','auto');ga('send','pageview');</script><script async src="https://www.google-analytics.com/analytics.js"></script></head><body><header class="site-header"><div class="container"><h1><a href="/" title="home">Tosainu Lab</a></h1></div></header><main class="post"><article><header class="post-header"><div class="container"><h1><a href="/entry/2016/08/21/arch-linux-l2tp-ipsec/" title="Arch LinuxでL2TP/IPsec">Arch LinuxでL2TP/IPsec</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2016/08/21 01:10</li><li><svg role="img" class="svg-inline--fa fa-tags fa-w-20" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></li><li><ul class="tag-list"><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li><li><a href="/entry/tags/linux/"><span>Linux</span></a></li><li><a href="/entry/tags/network/"><span>Network</span></a></li></ul></li></ul></div></header><div class="container"><div class="post-contents"><p>いろいろあってVPNを張りたくなったので, Arch LinuxでL2TP/IPsecなVPNサーバを構築したときのメモです.</p>
+<h2 id="環境">環境</h2>
+<p>図にするとこんな感じ.<br />
+記事中では, この図のIPアドレス及びネットワークインターフェース名を使っていきます.<br />
+<img src="https://c6.staticflickr.com/9/8430/29103640045_c31110bdb5_z.jpg" alt="diagram" /></p>
+<!--more-->
+<p>ちなみに, サーバにはクーポンが残っていたConoHa(リニューアル前)のメモリ1GBプラン(2core-CPU, 1GB-RAM, 100GB-HDD)を使いました.</p>
+<p>利用したソフトウェアとバージョンは以下のとおり.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ソフトウェア</th>
+<th style="text-align: center;">バージョン</th>
+<th>メモ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><a href="https://www.archlinux.org/" target="_blank" rel="nofollow noopener">Arch Linux</a></td>
+<td style="text-align: center;">-</td>
+<td>最高のLinuxディストリビューション</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><a href="https://www.openswan.org/" target="_blank" rel="nofollow noopener">Openswan</a></td>
+<td style="text-align: center;">2.6.47</td>
+<td>LinuxのためのIPsec(Internet Protocol Security)実装</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><a href="https://github.com/xelerance/xl2tpd" target="_blank" rel="nofollow noopener">xl2tpd</a></td>
+<td style="text-align: center;">1.3.7</td>
+<td>LinuxのためのL2TP(Layer 2 Tunneling Protocol)実装</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><a href="https://ppp.samba.org/" target="_blank" rel="nofollow noopener">ppp</a></td>
+<td style="text-align: center;">2.4.7</td>
+<td>LinuxやSolarisのためのPPP(Point-to-Point Protocol)実装</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">iptables</td>
+<td style="text-align: center;">1.6.0</td>
+<td>ファイアウォール</td>
+</tr>
+</tbody>
+</table>
+<h2 id="準備">準備</h2>
+<p>必要なソフトウェアをインストール. Openswanは公式のリポジトリにないのでAURから入れました.</p>
+<pre><code>$ yaourt -S iptables xl2tpd openswan</code></pre>
+<p>また, いくつかのカーネルパラメータを変更するために, <code>/etc/sysctl.d/99-sysctl.conf</code>(名前は適当)を作成.</p>
+<pre><code># /etc/sysctl.d/99-sysctl.conf
+
+net.ipv4.ip_forward = 1
+net.ipv4.conf.default.rp_filter = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+net.ipv4.icmp_ignore_bogus_error_responses = 1</code></pre>
+<p>以下のコマンドを実行して反映させます.</p>
+<pre><code>$ sudo sysctl --system</code></pre>
+<h2 id="サーバ側の設定">サーバ側の設定</h2>
+<h3 id="openswan">Openswan</h3>
+<p><code>/etc/ipsec.conf</code>の41行目, <code># Add connections here</code>の下に<code>include /etc/ipsec.d/*.conf</code>を追記.</p>
+<pre class="conf"><code># /etc/ipsec.conf - Openswan IPsec configuration file
+
+# This file:  /usr/share/doc/openswan/ipsec.conf-sample
+#
+# Manual:     ipsec.conf.5
+
+
+version	2.0	# conforms to second version of ipsec.conf specification
+
+# basic configuration
+config setup
+	# Do not set debug options to debug configuration issues!
+	# plutodebug / klipsdebug = &quot;all&quot;, &quot;none&quot; or a combation from below:
+	# &quot;raw crypt parsing emitting control klips pfkey natt x509 dpd private&quot;
+	# eg:
+	# plutodebug=&quot;control parsing&quot;
+	# Again: only enable plutodebug or klipsdebug when asked by a developer
+	#
+	# enable to get logs per-peer
+	# plutoopts=&quot;--perpeerlog&quot;
+	#
+	# Enable core dumps (might require system changes, like ulimit -C)
+	# This is required for abrtd to work properly
+	# Note: incorrect SElinux policies might prevent pluto writing the core
+	dumpdir=/var/run/pluto/
+	#
+	# NAT-TRAVERSAL support, see README.NAT-Traversal
+	nat_traversal=yes
+	# exclude networks used on server side by adding %v4:!a.b.c.0/24
+	# It seems that T-Mobile in the US and Rogers/Fido in Canada are
+	# using 25/8 as &quot;private&quot; address space on their 3G network.
+	# This range has not been announced via BGP (at least upto 2010-12-21)
+	virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:25.0.0.0/8,%v6:fd00::/8,%v6:fe80::/10
+	# OE is now off by default. Uncomment and change to on, to enable.
+	oe=off
+	# which IPsec stack to use. auto will try netkey, then klips then mast
+	protostack=auto
+	# Use this to log to a file, or disable logging on embedded systems (like openwrt)
+	#plutostderrlog=/dev/null
+
+# Add connections here
+include /etc/ipsec.d/*.conf</code></pre>
+<p><code>/etc/ipsec.d/examples/l2tp-psk.conf</code>を<code>/etc/ipsec.d/</code>にコピー.<br />
+33行目の<code>YourGatewayIP</code>の部分をサーバのIPアドレスに変更. また, 47行目以降の設定は今回必要ないので消しておきます.</p>
+<pre><code>$ sudo cp /etc/ipsec.d/examples/l2tp-psk.conf /etc/ipsec.d/</code></pre>
+<pre class="conf"><code># /etc/ipsec.d/l2tp-psk.conf
+
+conn L2TP-PSK-NAT
+	rightsubnet=vhost:%priv
+	also=L2TP-PSK-noNAT
+
+conn L2TP-PSK-noNAT
+	#
+	# Configuration for one user with any type of IPsec/L2TP client
+	# including the updated Windows 2000/XP (MS KB Q818043), but
+	# excluding the non-updated Windows 2000/XP.
+	#
+	#
+	# Use a Preshared Key. Disable Perfect Forward Secrecy.
+	#
+	# PreSharedSecret needs to be specified in /etc/ipsec.secrets as
+	# YourIPAddress	 %any: &quot;sharedsecret&quot;
+	authby=secret
+	pfs=no
+	auto=add
+	keyingtries=3
+	# we cannot rekey for %any, let client rekey
+	rekey=no
+	# Apple iOS doesn't send delete notify so we need dead peer detection
+	# to detect vanishing clients
+	dpddelay=10
+	dpdtimeout=90
+	dpdaction=clear
+	# Set ikelifetime and keylife to same defaults windows has
+	ikelifetime=8h
+	keylife=1h
+	# l2tp-over-ipsec is transport mode
+	type=transport
+	#
+	left=157.x.x.x
+	#
+	# For updated Windows 2000/XP clients,
+	# to support old clients as well, use leftprotoport=17/%any
+	leftprotoport=17/1701
+	#
+	# The remote user.
+	#
+	right=%any
+	# Using the magic port of &quot;%any&quot; means &quot;any one single port&quot;. This is
+	# a work around required for Apple OSX clients that use a randomly
+	# high port.
+	rightprotoport=17/%any</code></pre>
+<p>今回はサクッと立てたかったため, 認証方式にはPSK(Pre Shared Keys, 事前共有鍵)を選択.<br />
+<code>/etc/ipsec.secrets</code>をこんな感じに記述しました.</p>
+<pre class="conf"><code>: PSK &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;</code></pre>
+<h3 id="xl2tpd">xl2tpd</h3>
+<p><code>/etc/xl2tpd/xl2tpd.conf</code>をこんな感じに記述.<br />
+<code>listen-addr</code>にサーバのIPアドレス, <code>hostname</code>に適当な名前, <code>ip range</code>にクライアントに割り当てるIPアドレスの範囲, <code>local ip</code>にサーバのVPN側のIPアドレスを設定します.</p>
+<pre class="conf"><code>[global]
+listen-addr=157.x.x.x
+auth file = /etc/ppp/chap-secrets
+debug avp = no
+debug network = no
+debug packet = no
+debug state = no
+debug tunnel = no
+
+[lns default]
+hostname = hogefuga
+ip range = 10.2.0.100-10.2.0.149
+local ip = 10.2.0.1
+assign ip = yes
+length bit = yes
+ppp debug = no
+pppoptfile = /etc/ppp/options.l2tpd
+require authentication = yes
+require chap = yes
+require pap = no</code></pre>
+<h3 id="ppp">ppp</h3>
+<p><code>/etc/ppp/options.l2tpd</code>をこんな感じに記述.<br />
+<code>ms-dns</code>や<code>mtu</code>, <code>mru</code>は環境に合わせて適宜変更します.</p>
+<p>Openswanのドキュメント等では<code>crtscts</code>や<code>lock</code>も設定されていますが, これを入れるとエラーが出て起動しなかったため消してあります.</p>
+<pre class="conf"><code>ipcp-accept-local
+ipcp-accept-remote
+
+ms-dns 8.8.8.8
+ms-dns 8.8.4.4
+
+auth
+debug
+idle 1800
+mtu 1500
+mru 1500
+nodefaultroute
+persist
+proxyarp
+name l2tpd
+
+refuse-pap
+refuse-chap
+refuse-mschap
+require-mschap-v2</code></pre>
+<p>接続するユーザとパスワードを<code>/etc/ppp/chap-secrets</code>に記述しておきます.</p>
+<pre class="conf"><code># Secrets for authentication using CHAP
+# client	server	secret			IP addresses
+nyan l2tpd bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb *</code></pre>
+<h3 id="iptables">iptables</h3>
+<p><code>500/UDP</code>, <code>1701/UDP</code>, <code>4500/UDP</code>を開放.<br />
+また, NICとL2TP間をパケットが出入りできるように, いくつかのルールも設定します.</p>
+<pre><code># iptables -A INPUT -i ens3 -p udp -m policy --dir in --pol ipsec -m udp --dport 1701 -j ACCEPT
+# iptables -A INPUT -i ens3 -p udp --dport 4500 -j ACCEPT
+# iptables -A INPUT -i ens3 -p udp --dport 500 -j ACCEPT
+
+# iptables -A FORWARD -i ens3 -d 10.2.0.0/24 -j ACCEPT
+# iptables -A FORWARD -s 10.2.0.0/24 -o ens3 -j ACCEPT
+# iptables -t nat -A POSTROUTING -s 10.2.0.0/24 -o ens3 -j MASQUERADE</code></pre>
+<h3 id="サービスを有効にする">サービスを有効にする</h3>
+<p>とりあえずスタートして, エラーが出なければ有効にしておきます.</p>
+<pre><code>$ sudo systemctl start openswan xl2tpd
+$ sudo systemctl enable openswan xl2tpd</code></pre>
+<h2 id="クライアント側の設定">クライアント側の設定</h2>
+<h3 id="openswan-1">Openswan</h3>
+<p><code>/etc/ipsec.conf</code>の20行目を<code>plutoopts=&quot;--interface=wlp2s0&quot;</code>のようにして通信を行うインターフェースを指定し, また41行目の<code># Add connections here</code>以下に接続の設定を記述してしまいます.</p>
+<pre class="conf"><code># /etc/ipsec.conf - Openswan IPsec configuration file
+
+# This file:  /usr/share/doc/openswan/ipsec.conf-sample
+#
+# Manual:     ipsec.conf.5
+
+
+version	2.0	# conforms to second version of ipsec.conf specification
+
+# basic configuration
+config setup
+	# Do not set debug options to debug configuration issues!
+	# plutodebug / klipsdebug = &quot;all&quot;, &quot;none&quot; or a combation from below:
+	# &quot;raw crypt parsing emitting control klips pfkey natt x509 dpd private&quot;
+	# eg:
+	# plutodebug=&quot;control parsing&quot;
+	# Again: only enable plutodebug or klipsdebug when asked by a developer
+	#
+	# enable to get logs per-peer
+	plutoopts=&quot;--interface=wlp2s0&quot;
+	#
+	# Enable core dumps (might require system changes, like ulimit -C)
+	# This is required for abrtd to work properly
+	# Note: incorrect SElinux policies might prevent pluto writing the core
+	dumpdir=/var/run/pluto/
+	#
+	# NAT-TRAVERSAL support, see README.NAT-Traversal
+	nat_traversal=yes
+	# exclude networks used on server side by adding %v4:!a.b.c.0/24
+	# It seems that T-Mobile in the US and Rogers/Fido in Canada are
+	# using 25/8 as &quot;private&quot; address space on their 3G network.
+	# This range has not been announced via BGP (at least upto 2010-12-21)
+	virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:25.0.0.0/8,%v6:fd00::/8,%v6:fe80::/10
+	# OE is now off by default. Uncomment and change to on, to enable.
+	oe=off
+	# which IPsec stack to use. auto will try netkey, then klips then mast
+	protostack=netkey
+	# Use this to log to a file, or disable logging on embedded systems (like openwrt)
+	#plutostderrlog=/dev/null
+
+# Add connections here
+conn L2TP-PSK
+	authby=secret
+	pfs=no
+	auto=add
+	keyingtries=3
+	dpddelay=30
+	dpdtimeout=120
+	dpdaction=clear
+	rekey=yes
+	ikelifetime=8h
+	keylife=1h
+	type=transport
+	left=%defaultroute
+	leftprotoport=17/1701
+	right=157.x.x.x
+	rightprotoport=17/1701</code></pre>
+<p><code>/etc/ipsec.secrets</code>にサーバのIPアドレスとPSKを記述します.</p>
+<pre class="conf"><code>%any 157.x.x.x : PSK &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;</code></pre>
+<h3 id="xl2tpd-1">xl2tpd</h3>
+<p><code>/etc/xl2tpd/xl2tpd.conf</code>をこんな感じに記述.</p>
+<pre class="conf"><code>[lac vpn-connection]
+lns = 157.x.x.x
+ppp debug = no
+pppoptfile = /etc/ppp/options.l2tpd.client
+length bit = yes</code></pre>
+<h3 id="ppp-1">ppp</h3>
+<p><code>/etc/ppp/options.l2tpd.client</code>をこんな感じに記述.<br />
+<code>mtu</code>や<code>mru</code>は環境に合わせて適宜変更します. また, <code>name</code>と<code>password</code>にはサーバの<code>/etc/ppp/chap-secrets</code>に設定したものを記述します.</p>
+<pre class="conf"><code>ipcp-accept-local
+ipcp-accept-remote
+
+refuse-eap
+require-mschap-v2
+noauth
+noccp
+debug
+idle 1800
+mtu 1500
+mru 1500
+defaultroute
+usepeerdns
+noipdefault
+connect-delay 5000
+
+name nyan
+password bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</code></pre>
+<h3 id="接続する">接続する</h3>
+<p>予めxl2tpdコントロール用のファイルを作成しておきます.</p>
+<pre><code>$ sudo mkdir -p /var/run/xl2tpd
+$ sudo touch /var/run/xl2tpd/l2tp-control</code></pre>
+<p>Openswan, xl2tpdを起動し, サーバに接続.</p>
+<pre><code>$ sudo systemctl start openswan xl2tpd
+$ ipsec auto --up L2TP-PSK
+$ sudo sh -c 'echo &quot;c vpn-connection&quot; &gt; /var/run/xl2tpd/l2tp-control'</code></pre>
+<p><code>ip a</code>等で<code>ppp0</code>のようなインターフェースが現れていればおそらく成功です.</p>
+<pre><code>$ ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+
+---
+
+18: ppp0: &lt;POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 3
+    link/ppp 
+    inet 10.2.0.100 peer 10.2.0.1/32 scope global ppp0
+       valid_lft forever preferred_lft forever</code></pre>
+<p>全てのトラフィックをVPN経由にするために, ルーティングの設定をしてやります.</p>
+<pre><code>$ sudo ip route add 157.x.x.x via 192.168.0.1 dev wlp2s0
+$ sudo ip route add default via 10.2.0.100</code></pre>
+<p>試しに<code>traceroute</code>してみると, 確かにVPSを経由しているっぽいことが確認できました.</p>
+<pre><code>$ traceroute google.com
+traceroute to google.com (172.217.25.78), 30 hops max, 60 byte packets
+ 1  10.2.0.1 (10.2.0.1)  25.864 ms  25.858 ms  25.887 ms
+ 2  v157-x-x-x.xxx.static.cnode.jp (157.x.x.x)  26.937 ms  26.912 ms  26.727 ms
+ 3  157.7.42.33 (157.7.42.33)  31.746 ms  32.370 ms  31.793 ms
+ 4  unused-133-130-013-017.interq.or.jp (133.130.13.17)  31.812 ms  31.729 ms  31.742 ms
+ 5  unused-133-130-012-033.interq.or.jp (133.130.12.33)  31.415 ms  31.326 ms  30.830 ms
+ 6  as15169.ix.jpix.ad.jp (210.171.224.96)  32.713 ms  22.008 ms  24.173 ms
+ 7  216.239.54.5 (216.239.54.5)  31.506 ms  31.349 ms  31.465 ms
+ 8  108.170.233.77 (108.170.233.77)  30.116 ms 108.170.233.79 (108.170.233.79)  31.230 ms 108.170.233.77 (108.170.233.77)  30.432 ms
+ 9  nrt13s50-in-f14.1e100.net (172.217.25.78)  30.481 ms  30.522 ms  33.844 ms</code></pre>
+<h3 id="切断する">切断する</h3>
+<p>こんな感じにするようです. 接続の逆をする感じですね.</p>
+<pre><code>$ ipsec auto --down L2TP-PSK
+$ sudo sh -c 'echo &quot;d vpn-connection&quot; &gt; /var/run/xl2tpd/l2tp-control'
+$ sudo systemctl stop openswan xl2tpd
+
+$ sudo ip route del 157.x.x.x via 192.168.0.1 dev wlp2s0</code></pre>
+<h2 id="その他">その他</h2>
+<p>Openswanやxl2tpdが出力するログは, 以下のようなコマンドで確認できます.</p>
+<pre><code>$ journalctl -f -u openswan.service -u xl2tpd.service</code></pre>
+<p>また, 設定ファイルの<code>debug xxx</code>等の項目を<code>yes</code>にすると出力される情報が増えるので, 上手く接続できないときは試してみると良いかもしれません.</p>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li><a href="https://github.com/xelerance/Openswan/wiki/L2tp-ipsec-configuration-using-openswan-and-xl2tpd" target="_blank" rel="nofollow noopener">L2tp ipsec configuration using openswan and xl2tpd · xelerance/Openswan Wiki</a></li>
+<li><a href="https://raymii.org/s/tutorials/IPSEC_L2TP_vpn_on_a_Raspberry_Pi_with_Arch_Linux.html" target="_blank" rel="nofollow noopener">IPSEC L2TP VPN on Arch Linux on a Raspberry Pi with OpenSwan, xl2tpd and ppp - Raymii.org</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Openswan_L2TP/IPsec_VPN_client_setup" target="_blank" rel="nofollow noopener">Openswan L2TP/IPsec VPN client setup - ArchWiki</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/sysctl" target="_blank" rel="nofollow noopener">sysctl - ArchWiki</a></li>
+</ul></div><aside class="share"><a href="https://twitter.com/share?text=Arch%20Linux%E3%81%A7L2TP%2FIPsec%20%7C%20Tosainu%20Lab&amp;url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2016%2F08%2F21%2Farch-linux-l2tp-ipsec%2Findex.html" class="share-button twitter" target="_blank" rel="nofollow noopener"><svg role="img" class="svg-inline--fa fa-twitter fa-w-16 fa-lg" data-icon="twitter" data-prefix="fab" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><span>Twitter</span></a><a href="http://b.hatena.ne.jp/add?mode=confirm&amp;url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2016%2F08%2F21%2Farch-linux-l2tp-ipsec%2Findex.html&amp;title=Arch%20Linux%E3%81%A7L2TP%2FIPsec%20%7C%20Tosainu%20Lab" class="share-button hatena" target="_blank" rel="nofollow noopener"><img src="/images/hatenabookmark-logomark.svg"><span>hatena</span></a><a href="https://plusone.google.com/_/+1/confirm?url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2016%2F08%2F21%2Farch-linux-l2tp-ipsec%2Findex.html" class="share-button google-plus" target="_blank" rel="nofollow noopener"><svg role="img" class="svg-inline--fa fa-google-plus-g fa-w-20 fa-lg" data-icon="google-plus-g" data-prefix="fab" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M386.061 228.496c1.834 9.692 3.143 19.384 3.143 31.956C389.204 370.205 315.599 448 204.8 448c-106.084 0-192-85.915-192-192s85.916-192 192-192c51.864 0 95.083 18.859 128.611 50.292l-52.126 50.03c-14.145-13.621-39.028-29.599-76.485-29.599-65.484 0-118.92 54.221-118.92 121.277 0 67.056 53.436 121.277 118.92 121.277 75.961 0 104.513-54.745 108.965-82.773H204.8v-66.009h181.261zm185.406 6.437V179.2h-56.001v55.733h-55.733v56.001h55.733v55.733h56.001v-55.733H627.2v-56.001h-55.733z"></path></svg><span>Google+</span></a><a href="https://getpocket.com/save?url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2016%2F08%2F21%2Farch-linux-l2tp-ipsec%2Findex.html" class="share-button pocket" target="_blank" rel="nofollow noopener"><svg role="img" class="svg-inline--fa fa-get-pocket fa-w-14 fa-lg" data-icon="get-pocket" data-prefix="fab" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M407.6 64h-367C18.5 64 0 82.5 0 104.6v135.2C0 364.5 99.7 464 224.2 464c124 0 223.8-99.5 223.8-224.2V104.6c0-22.4-17.7-40.6-40.4-40.6zm-162 268.5c-12.4 11.8-31.4 11.1-42.4 0C89.5 223.6 88.3 227.4 88.3 209.3c0-16.9 13.8-30.7 30.7-30.7 17 0 16.1 3.8 105.2 89.3 90.6-86.9 88.6-89.3 105.5-89.3 16.9 0 30.7 13.8 30.7 30.7 0 17.8-2.9 15.7-114.8 123.2z"></path></svg><span>Pocket</span></a></aside><aside class="comments"><div id="disqus_thread"></div><script>(function() { var d = document, s = d.createElement('script');s.src = 'https://tosainu.disqus.com/embed.js';s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s); })();</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener">comments powered by Disqus.</a></noscript></aside><nav class="nav post-nav"></nav></div></article></main><footer class="site-footer"><div class="footer-widgets"><div class="container"><div class="col"><section class="about-me"><h4><svg role="img" class="svg-inline--fa fa-user fa-w-14 fa-fw" data-icon="user" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg> About Me</h4><div class="about"><div class="avatar"><img src="/images/icon/cocoa.svg" class="icon" alt="avatar"></div><div class="info"><div class="name"><a href="https://myon.info" target="_blank" rel="nofollow noopener">Tosainu</a></div><div class="info">❤ Arch Linux, ごちうさ</div></div></div></section><section class="recent-posts"><h4><svg role="img" class="svg-inline--fa fa-file-alt fa-w-12 fa-fw" data-icon="file-alt" data-prefix="fas" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg> Recent Posts</h4><ul><li><a href="/entry/2018/08/16/non-route-rules/">route なしの Rules で Hakyll のビルドを高速化する</a></li><li><a href="/entry/2018/03/21/hakyll/">ブログを Hakyll に移行した</a></li><li><a href="/entry/2018/01/05/haskell-linear-classifier/">簡単な2クラスの線形分類器を実装してみる</a></li><li><a href="/entry/2017/09/04/twctf-2017-writeups/">Tokyo Westerns CTF 3rd 2017: simple note</a></li><li><a href="/entry/2017/05/02/def-con-ctf-2017-qualifier-writeups/">DEF CON CTF 2017 Qualifier writeup</a></li></ul></section></div><section class="tag-cloud"><h4><svg role="img" class="svg-inline--fa fa-tags fa-w-20 fa-fw" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg> Tags</h4><ul class="tag-list"><li><a href="/entry/tags/android/"><span>Android</span></a></li><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li><li><a href="/entry/tags/arduino/"><span>Arduino</span></a></li><li><a href="/entry/tags/c/"><span>C++</span></a></li><li><a href="/entry/tags/ctf/"><span>CTF</span></a></li><li><a href="/entry/tags/cocoatwit/"><span>CocoaTwit</span></a></li><li><a href="/entry/tags/diy-pc/"><span>DIY PC</span></a></li><li><a href="/entry/tags/game/"><span>Game</span></a></li><li><a href="/entry/tags/gnuplot/"><span>Gnuplot</span></a></li><li><a href="/entry/tags/gochiusa/"><span>Gochiusa</span></a></li><li><a href="/entry/tags/hakyll/"><span>Hakyll</span></a></li><li><a href="/entry/tags/haskell/"><span>Haskell</span></a></li><li><a href="/entry/tags/linux/"><span>Linux</span></a></li><li><a href="/entry/tags/machine-learning/"><span>Machine learning</span></a></li><li><a href="/entry/tags/middleman/"><span>Middleman</span></a></li><li><a href="/entry/tags/network/"><span>Network</span></a></li><li><a href="/entry/tags/raspberry-pi/"><span>Raspberry Pi</span></a></li><li><a href="/entry/tags/ruby/"><span>Ruby</span></a></li><li><a href="/entry/tags/slack/"><span>Slack</span></a></li><li><a href="/entry/tags/vaio-z2/"><span>VAIO Z2</span></a></li><li><a href="/entry/tags/vim/"><span>Vim</span></a></li><li><a href="/entry/tags/walkmanz/"><span>WalkmanZ</span></a></li><li><a href="/entry/tags/website/"><span>Website</span></a></li><li><a href="/entry/tags/xperia-nx/"><span>Xperia NX</span></a></li><li><a href="/entry/tags/xperia-arc/"><span>Xperia arc</span></a></li><li><a href="/entry/tags/xperia2011/"><span>Xperia2011</span></a></li><li><a href="/entry/tags/seccamp/"><span>seccamp</span></a></li></ul></section><section class="archives"><h4><svg role="img" class="svg-inline--fa fa-archive fa-w-16 fa-fw" data-icon="archive" data-prefix="fas" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M32 448c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32V160H32v288zm160-212c0-6.6 5.4-12 12-12h104c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-8zM480 32H32C14.3 32 0 46.3 0 64v48c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16V64c0-17.7-14.3-32-32-32z"></path></svg> Archives</h4><ul class="archive-tree"><li><input id="tree-label-2018" type="checkbox" class="tree-toggle"><label for="tree-label-2018" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2018/">2018 (3)</a></label><ul class="tree-child"><li><a href="/entry/2018/08/">2018/08 (1)</a></li><li><a href="/entry/2018/03/">2018/03 (1)</a></li><li><a href="/entry/2018/01/">2018/01 (1)</a></li></ul></li><li><input id="tree-label-2017" type="checkbox" class="tree-toggle"><label for="tree-label-2017" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2017/">2017 (5)</a></label><ul class="tree-child"><li><a href="/entry/2017/09/">2017/09 (1)</a></li><li><a href="/entry/2017/05/">2017/05 (1)</a></li><li><a href="/entry/2017/02/">2017/02 (3)</a></li></ul></li><li><input checked id="tree-label-2016" type="checkbox" class="tree-toggle"><label for="tree-label-2016" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2016/">2016 (8)</a></label><ul class="tree-child"><li><a href="/entry/2016/08/">2016/08 (2)</a></li><li><a href="/entry/2016/07/">2016/07 (1)</a></li><li><a href="/entry/2016/06/">2016/06 (1)</a></li><li><a href="/entry/2016/05/">2016/05 (1)</a></li><li><a href="/entry/2016/03/">2016/03 (1)</a></li><li><a href="/entry/2016/01/">2016/01 (2)</a></li></ul></li><li><input id="tree-label-2015" type="checkbox" class="tree-toggle"><label for="tree-label-2015" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2015/">2015 (12)</a></label><ul class="tree-child"><li><a href="/entry/2015/12/">2015/12 (1)</a></li><li><a href="/entry/2015/08/">2015/08 (1)</a></li><li><a href="/entry/2015/06/">2015/06 (2)</a></li><li><a href="/entry/2015/05/">2015/05 (2)</a></li><li><a href="/entry/2015/04/">2015/04 (1)</a></li><li><a href="/entry/2015/03/">2015/03 (2)</a></li><li><a href="/entry/2015/02/">2015/02 (1)</a></li><li><a href="/entry/2015/01/">2015/01 (2)</a></li></ul></li><li><input id="tree-label-2014" type="checkbox" class="tree-toggle"><label for="tree-label-2014" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2014/">2014 (62)</a></label><ul class="tree-child"><li><a href="/entry/2014/12/">2014/12 (7)</a></li><li><a href="/entry/2014/11/">2014/11 (4)</a></li><li><a href="/entry/2014/10/">2014/10 (3)</a></li><li><a href="/entry/2014/09/">2014/09 (3)</a></li><li><a href="/entry/2014/08/">2014/08 (5)</a></li><li><a href="/entry/2014/07/">2014/07 (6)</a></li><li><a href="/entry/2014/06/">2014/06 (6)</a></li><li><a href="/entry/2014/05/">2014/05 (4)</a></li><li><a href="/entry/2014/04/">2014/04 (6)</a></li><li><a href="/entry/2014/03/">2014/03 (7)</a></li><li><a href="/entry/2014/02/">2014/02 (5)</a></li><li><a href="/entry/2014/01/">2014/01 (6)</a></li></ul></li><li><input id="tree-label-2013" type="checkbox" class="tree-toggle"><label for="tree-label-2013" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2013/">2013 (116)</a></label><ul class="tree-child"><li><a href="/entry/2013/12/">2013/12 (8)</a></li><li><a href="/entry/2013/11/">2013/11 (6)</a></li><li><a href="/entry/2013/10/">2013/10 (5)</a></li><li><a href="/entry/2013/09/">2013/09 (5)</a></li><li><a href="/entry/2013/08/">2013/08 (4)</a></li><li><a href="/entry/2013/07/">2013/07 (3)</a></li><li><a href="/entry/2013/06/">2013/06 (12)</a></li><li><a href="/entry/2013/05/">2013/05 (16)</a></li><li><a href="/entry/2013/04/">2013/04 (16)</a></li><li><a href="/entry/2013/03/">2013/03 (27)</a></li><li><a href="/entry/2013/02/">2013/02 (7)</a></li><li><a href="/entry/2013/01/">2013/01 (7)</a></li></ul></li><li><input id="tree-label-2012" type="checkbox" class="tree-toggle"><label for="tree-label-2012" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2012/">2012 (11)</a></label><ul class="tree-child"><li><a href="/entry/2012/12/">2012/12 (3)</a></li><li><a href="/entry/2012/09/">2012/09 (1)</a></li><li><a href="/entry/2012/07/">2012/07 (4)</a></li><li><a href="/entry/2012/04/">2012/04 (1)</a></li><li><a href="/entry/2012/03/">2012/03 (1)</a></li><li><a href="/entry/2012/01/">2012/01 (1)</a></li></ul></li><li><input id="tree-label-2011" type="checkbox" class="tree-toggle"><label for="tree-label-2011" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2011/">2011 (12)</a></label><ul class="tree-child"><li><a href="/entry/2011/09/">2011/09 (1)</a></li><li><a href="/entry/2011/06/">2011/06 (1)</a></li><li><a href="/entry/2011/05/">2011/05 (1)</a></li><li><a href="/entry/2011/03/">2011/03 (6)</a></li><li><a href="/entry/2011/02/">2011/02 (1)</a></li><li><a href="/entry/2011/01/">2011/01 (2)</a></li></ul></li></ul></section></div></div><div class="footer-bottom"><div class="container"><div class="copyright">© 2011-2018 Tosainu. Site generated by <a href="https://jaspervdj.be/hakyll/" target="_blank" rel="nofollow noopener">Hakyll</a>.</div></div></div></footer></body></html>

